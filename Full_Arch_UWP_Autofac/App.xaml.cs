@@ -15,8 +15,15 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+using Autofac;
 using Full_Arch_UWP_Autofac.Views;
 using Full_Arch_UWP_Autofac.ViewModels;
+using Full_Arch_UWP_Autofac.Helpers;
+using Test_Core.Domain;
+
+
+
+//https://stackoverflow.com/questions/49843225/how-to-use-autofac-in-an-uwp-app
 
 namespace Full_Arch_UWP_Autofac
 {
@@ -32,8 +39,33 @@ namespace Full_Arch_UWP_Autofac
         public App()
         {
             this.InitializeComponent();
+
+            Container = ConfigureServices();
+
             this.Suspending += OnSuspending;
         }
+        public static IContainer Container { get; set; }
+        private IContainer ConfigureServices()
+        {
+            var containerBuilder = new ContainerBuilder();
+
+            //  Registers all the platform-specific implementations of services.
+            containerBuilder.RegisterType<Debug_WriteString>().As<IWriteString>().SingleInstance();
+
+            //...Register ViewModels as well
+            containerBuilder.RegisterType<ShellPage_ViewModel>().AsSelf();
+            containerBuilder.RegisterType<MainPage_ViewModel>().AsSelf();
+            containerBuilder.RegisterType<OtherPage_ViewModel>().AsSelf();
+
+            containerBuilder.RegisterType<DefaultFrameProvider>().As<IFrameProvider>().SingleInstance();
+            containerBuilder.RegisterType<ViewModelBinder>().As<IViewModelBinder>().SingleInstance();
+            containerBuilder.RegisterType<AutofacServiceProvider>().As<IServiceProvider>();
+            containerBuilder.RegisterType<NavigationService>().AsSelf().As<INavigationService>();
+
+            var container = containerBuilder.Build();
+            return container;
+        }
+
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
@@ -50,17 +82,17 @@ namespace Full_Arch_UWP_Autofac
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
-
                 rootFrame.NavigationFailed += OnNavigationFailed;
-
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
                 }
-
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
+
+            //**Activating navigation service
+            var service = Container.Resolve<INavigationService>();
 
             if (e.PrelaunchActivated == false)
             {
@@ -69,19 +101,26 @@ namespace Full_Arch_UWP_Autofac
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(ShellPage), e.Arguments);
+                    rootFrame.Navigate<ShellPage, ShellPage_ViewModel>();
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
         }
+        public class AutofacServiceProvider : IServiceProvider 
+        {
+            public object GetService(Type serviceType)
+            {
+                return App.Container.Resolve(serviceType);
+            }
+        }
 
-        /// <summary>
-        /// Invoked when Navigation to a certain page fails
-        /// </summary>
-        /// <param name="sender">The Frame which failed navigation</param>
-        /// <param name="e">Details about the navigation failure</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+    /// <summary>
+    /// Invoked when Navigation to a certain page fails
+    /// </summary>
+    /// <param name="sender">The Frame which failed navigation</param>
+    /// <param name="e">Details about the navigation failure</param>
+    void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
