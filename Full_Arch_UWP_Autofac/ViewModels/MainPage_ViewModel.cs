@@ -9,6 +9,7 @@ using Full_Arch_UWP_Autofac.Helpers;
 
 namespace Full_Arch_UWP_Autofac.ViewModels
 {
+    //hos
     public class MainPage_ViewModel
     {
         public MyICommand<Button> ButtonClickCommand { get; private set; }
