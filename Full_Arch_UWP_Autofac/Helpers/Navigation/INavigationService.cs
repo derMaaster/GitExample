@@ -6,5 +6,7 @@ namespace Full_Arch_UWP_Autofac.Helpers
     {
         bool Navigate<TView>() where TView : Page;
         bool Navigate<TView, TViewModel>(object parameter = null) where TView : Page;
+
+        string CurrentPage { get; }
     }
 }

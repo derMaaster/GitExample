@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using System.Diagnostics;
 using Full_Arch_UWP_Autofac.Helpers;
+using Full_Arch_UWP_Autofac.Views;
 
 namespace Full_Arch_UWP_Autofac.ViewModels
 {
@@ -16,5 +17,27 @@ namespace Full_Arch_UWP_Autofac.ViewModels
         {
             this.Navigation = navigation;
         }
+
+        public Boolean MainPageSelected
+        {
+            get { return Navigation.CurrentPage == "Main_Page"; }
+            set
+            {
+                if (value)
+                    Navigation.Navigate<MainPage,MainPage_ViewModel>();
+            }
+        }
+
+        public Boolean OtherPageSelected
+        {
+            get { return Navigation.CurrentPage == "Other_Page"; }
+            set
+            {
+                if (value)
+                    Navigation.Navigate<OtherPage,OtherPage_ViewModel>();
+            }
+        }
+
+
     }
 }

@@ -10,6 +10,7 @@ namespace Full_Arch_UWP_Autofac.Helpers
             get
             {
                 return (Window.Current.Content as Frame);
+                //return ((Window.Current.Content as Frame)?.Content as ShellPage)?.AppFrame;
             }
         }
     }

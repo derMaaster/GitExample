@@ -43,9 +43,20 @@ namespace Full_Arch_UWP_Autofac.Helpers
         }
 
 
-        //Additional Code to try and do page navigation within Shell.xaml's frame
-        // This is the frame inside Shell.xaml:
-        private static Frame AppFrame => ((Window.Current.Content as Frame)?.Content as ShellPage)?.AppFrame;
-        //public bool NavigateFrame
+        public const string UnknownPage = "(Unknown)";
+        public string CurrentPage
+        {
+            get
+            {                
+                var mainFrame = frame;
+                if (mainFrame.Content == null)
+                    return UnknownPage;
+
+                var frameString = mainFrame.Content.ToString();
+
+                return frameString;
+
+            }
+        }
     }
 }

@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Full_Arch_UWP_Autofac.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,6 +26,11 @@ namespace Full_Arch_UWP_Autofac.Views
         public MainPage()
         {
             this.InitializeComponent();
+        }
+        public MainPage_ViewModel ViewModel { get { return (MainPage_ViewModel)DataContext; } }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
         }
     }
 }

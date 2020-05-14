@@ -90,7 +90,6 @@ namespace Full_Arch_UWP_Autofac
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
-
             //**Activating navigation service
             var service = Container.Resolve<INavigationService>();
 
@@ -105,6 +104,7 @@ namespace Full_Arch_UWP_Autofac
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
+                
             }
         }
         public class AutofacServiceProvider : IServiceProvider 
