@@ -17,8 +17,8 @@ namespace Full_Arch_UWP_Autofac.Helpers
         {
             InitializeComponent(view);
 
-            if (view.DataContext != null)
-                return;
+            //if (view.DataContext != null)
+            //    return;
 
             var context = viewModel as NavigationContext;
             if (context != null)
@@ -35,7 +35,6 @@ namespace Full_Arch_UWP_Autofac.Helpers
 
             view.DataContext = viewModel;
         }
-
         static void InitializeComponent(object element)
         {
             var method = element.GetType().GetTypeInfo()

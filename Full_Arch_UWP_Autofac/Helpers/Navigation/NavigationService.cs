@@ -43,6 +43,25 @@ namespace Full_Arch_UWP_Autofac.Helpers
         }
 
 
+
+
+
+        // Additional Code added to example's NavigationSerice: in order to isolate the main window's frame from the internal Shellpage frame navigation
+        public Frame ShellFrame;
+        public bool NavigateShellFrame<TView, TViewModel>(object parameter = null) where TView : Page
+        {
+            if (ShellFrame == null)
+            {
+                ShellFrame = ((Window.Current.Content as Frame)?.Content as ShellPage)?.AppFrame;
+                ShellFrame.Navigated += OnNavigated;
+            }
+
+            var context = new NavigationContext(typeof(TViewModel), parameter);
+            return ShellFrame.Navigate(typeof(TView), context);
+        }
+
+
+        // For Radiobutton Logic in ShellPage_ViewModel
         public const string UnknownPage = "(Unknown)";
         public string CurrentPage
         {

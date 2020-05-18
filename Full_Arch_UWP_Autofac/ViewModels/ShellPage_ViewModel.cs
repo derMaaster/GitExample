@@ -24,7 +24,7 @@ namespace Full_Arch_UWP_Autofac.ViewModels
             set
             {
                 if (value)
-                    Navigation.Navigate<MainPage,MainPage_ViewModel>();
+                    Navigation.NavigateShellFrame<MainPage,MainPage_ViewModel>();
             }
         }
 
@@ -34,7 +34,7 @@ namespace Full_Arch_UWP_Autofac.ViewModels
             set
             {
                 if (value)
-                    Navigation.Navigate<OtherPage,OtherPage_ViewModel>();
+                    Navigation.NavigateShellFrame<OtherPage,OtherPage_ViewModel>();
             }
         }
 
