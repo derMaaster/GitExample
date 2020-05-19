@@ -90,7 +90,12 @@ namespace Full_Arch_UWP_Autofac
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
-            //**Activating navigation service
+            //**Activating viewModelBinder and Navigation service
+            var binder = Container.Resolve<IViewModelBinder>();
+            binder.Configure("ShellPage", "ShellPage_ViewModel");
+            binder.Configure("MainPage", "MainPage_ViewModel");
+            binder.Configure("OtherPage", "OtherPage_ViewModel");
+
             var service = Container.Resolve<INavigationService>();
 
             if (e.PrelaunchActivated == false)

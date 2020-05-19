@@ -30,7 +30,7 @@ namespace Full_Arch_UWP_Autofac.Helpers
                 throw new ArgumentException("View '" + e.Content.GetType().FullName +
                     "' should inherit from Page or one of its descendents.");
 
-            viewModelBinder.Bind(view, e.Parameter);
+            viewModelBinder.Bind(view, e);
         }
         public bool Navigate<TView>() where TView : Page
         {
