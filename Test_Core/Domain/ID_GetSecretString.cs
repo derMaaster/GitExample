@@ -4,8 +4,7 @@ using System.Text;
 
 namespace Test_Core.Domain
 {
-    public interface IWriteString
+    public interface ID_GetSecretString
     {
-        bool WriteString(string s);
     }
 }

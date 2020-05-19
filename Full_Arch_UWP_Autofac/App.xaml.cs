@@ -50,13 +50,14 @@ namespace Full_Arch_UWP_Autofac
             var containerBuilder = new ContainerBuilder();
 
             //  Registers all the platform-specific implementations of services.
-            containerBuilder.RegisterType<Debug_WriteString>().As<IWriteString>().SingleInstance();
+            containerBuilder.RegisterType<DebugWriteString>().As<ID_WriteString>();
 
-            //...Register ViewModels as well
+            //ViewModels as well:
             containerBuilder.RegisterType<ShellPage_ViewModel>().AsSelf();
             containerBuilder.RegisterType<MainPage_ViewModel>().AsSelf();
             containerBuilder.RegisterType<OtherPage_ViewModel>().AsSelf();
 
+            //Navigation:
             containerBuilder.RegisterType<DefaultFrameProvider>().As<IFrameProvider>().SingleInstance();
             containerBuilder.RegisterType<ViewModelBinder>().As<IViewModelBinder>().SingleInstance();
             containerBuilder.RegisterType<AutofacServiceProvider>().As<IServiceProvider>();

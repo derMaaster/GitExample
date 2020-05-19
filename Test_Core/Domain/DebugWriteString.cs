@@ -2,13 +2,13 @@
 
 namespace Test_Core.Domain
 {
-    public class Debug_WriteString : IWriteString
+    public class DebugWriteString : ID_WriteString
     {
-        public bool WriteString(string s)
+        public bool WriteString(DebugStringClass debugStringClass)
         {
             try
             {
-                Debug.WriteLine("DebugWriteStringClass writing: " + s);
+                Debug.WriteLine("DebugWriteStringClass writing: " + debugStringClass.stringMessage);
                 return true;
             }
             catch

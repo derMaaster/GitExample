@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
 using System.Diagnostics;
 using Full_Arch_UWP_Autofac.Helpers;
+using Test_Core.DataAdaptorLayer;
 
 namespace Full_Arch_UWP_Autofac.ViewModels
 {
-    //hos
+    //
     public class MainPage_ViewModel
     {
         public MyICommand<Button> ButtonClickCommand { get; private set; }
