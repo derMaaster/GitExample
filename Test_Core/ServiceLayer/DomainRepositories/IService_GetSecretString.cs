@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using Test_Core.Domain;
 
-namespace Test_Core.UseCase
+namespace Test_Core.ServiceLayer
 {
-    public interface IUC_GetSecretString
+    public interface IService_GetSecretString
     {
+        string GetString();
     }
 }

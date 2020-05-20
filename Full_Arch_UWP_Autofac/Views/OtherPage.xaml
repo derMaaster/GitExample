@@ -10,16 +10,17 @@
 
     <Grid>
         <StackPanel>
-            <TextBlock Text="OtherPage"
+            <TextBlock Text="GetSecretText Page"
                        />
-            <Button x:Name="ButtonDoPopup"
+            <Button x:Name="ButtonGetSecret"
                     Content="Get the secret text from Domain logic"
                     Command="{Binding OtherButtonClickCommand}"
-                    CommandParameter="{Binding ElementName=ButtonDoPopup}"
+                    CommandParameter="{Binding ElementName=ButtonGetSecret}"
                     Margin="10,10,0,0">
             </Button>
             <TextBox Text="{Binding TextBoxText,Mode=OneWay}"
-                     Margin="10"/>
+                     Margin="10"
+                     PlaceholderText="click button to load this textblock with secret text..."/>
         </StackPanel>
 
     </Grid>

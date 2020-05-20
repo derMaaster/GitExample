@@ -29,12 +29,12 @@
                                  GroupName="Group1"
                                  Style="{StaticResource NavigationButtonStyle}"
                                  IsChecked="{Binding MainPageSelected,Mode=TwoWay}"
-                                 Content="MainPage"/>
+                                 Content="WriteDebug"/>
                     <RadioButton x:Name="Option2"
                                  GroupName="Group1"
                                  Style="{StaticResource NavigationButtonStyle}"
                                  IsChecked="{Binding OtherPageSelected, Mode=TwoWay}"
-                                 Content="OtherPage"/>
+                                 Content="GetSecret"/>
                 </StackPanel>
             </Grid>
 

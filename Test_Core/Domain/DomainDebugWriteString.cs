@@ -2,9 +2,9 @@
 
 namespace Test_Core.Domain
 {
-    public class DebugWriteString : ID_WriteString
+    public class DomainDebugWriteString : IDomain_WriteString
     {
-        public bool WriteString(DebugStringClass debugStringClass)
+        public bool WriteStringToDebug(DebugStringClass debugStringClass)
         {
             try
             {

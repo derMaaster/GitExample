@@ -20,6 +20,7 @@ using Full_Arch_UWP_Autofac.Views;
 using Full_Arch_UWP_Autofac.ViewModels;
 using Full_Arch_UWP_Autofac.Helpers;
 using Test_Core.Domain;
+using Test_Core.ServiceLayer;
 
 
 
@@ -50,7 +51,13 @@ namespace Full_Arch_UWP_Autofac
             var containerBuilder = new ContainerBuilder();
 
             //  Registers all the platform-specific implementations of services.
-            containerBuilder.RegisterType<DebugWriteString>().As<ID_WriteString>();
+            //      domain:
+            containerBuilder.RegisterType<DomainDebugWriteString>().As<IDomain_WriteString>();
+            containerBuilder.RegisterType<DomainGetSecretString>().As<IDomain_GetSecretString>();
+            //      serviceLayer:
+            containerBuilder.RegisterType<ServiceDebugWriteString>().As<IService_DebugWriteString>();
+            containerBuilder.RegisterType<ServiceGetSecretString>().As<IService_GetSecretString>();
+
 
             //ViewModels as well:
             containerBuilder.RegisterType<ShellPage_ViewModel>().AsSelf();

@@ -10,14 +10,18 @@
 
     <Grid>
         <StackPanel>
-            <TextBlock Text="MainPage"
+            <TextBlock Text="WriteToDebugLine Page "
                        />
             <Button x:Name="ButtonDoDebug"
-                    Content="DoDebug"
+                    Content="Write Text to debug window:"
                     Command="{Binding ButtonClickCommand}"
                     CommandParameter="{Binding ElementName=ButtonDoDebug}"
-                    Margin="10,10,0,0">
+                    Margin="10,10,0,0"
+                    >
             </Button>
+            <TextBox Text="{Binding TextBoxText,Mode=TwoWay}"
+                     Margin="10"
+                     PlaceholderText="write someting 'ere for da system debug read..."/>
 
         </StackPanel>
 
