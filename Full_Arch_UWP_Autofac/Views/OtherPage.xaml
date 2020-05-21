@@ -10,8 +10,6 @@
 
     <Grid>
         <StackPanel>
-            <TextBlock Text="GetSecretText Page"
-                       />
             <Button x:Name="ButtonGetSecret"
                     Content="Get the secret text from Domain logic"
                     Command="{Binding OtherButtonClickCommand}"

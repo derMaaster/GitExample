@@ -22,8 +22,6 @@ using Full_Arch_UWP_Autofac.Helpers;
 using Test_Core.Domain;
 using Test_Core.ServiceLayer;
 
-
-
 //https://stackoverflow.com/questions/49843225/how-to-use-autofac-in-an-uwp-app
 
 namespace Full_Arch_UWP_Autofac

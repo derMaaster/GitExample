@@ -10,8 +10,6 @@
 
     <Grid>
         <StackPanel>
-            <TextBlock Text="WriteToDebugLine Page "
-                       />
             <Button x:Name="ButtonDoDebug"
                     Content="Write Text to debug window:"
                     Command="{Binding ButtonClickCommand}"
