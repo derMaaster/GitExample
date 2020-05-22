@@ -2,6 +2,10 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using System.Collections.Generic;
+using System.Linq;
+using Full_Arch_UWP_Autofac.Views;
+using Full_Arch_UWP_Autofac.ViewModels;
 
 //
 namespace Full_Arch_UWP_Autofac.Helpers
@@ -43,21 +47,46 @@ namespace Full_Arch_UWP_Autofac.Helpers
         }
 
 
-
-
-
         // Additional Code added to example's NavigationSerice: in order to isolate the main window's frame from the internal Shellpage frame navigation
         public Frame ShellFrame;
-        public bool NavigateShellFrame<TView, TViewModel>(object parameter = null) where TView : Page
+        private readonly IDictionary<string, Type> pages_ = new Dictionary<string, Type>();
+        private readonly IDictionary<string, Type> viewModels_ = new Dictionary<string, Type>();
+
+        public void ConfigureBindings(string pageString, Type page, Type viewModel)
+        {
+            lock (pages_)
+            {
+                if (pages_.ContainsKey(pageString))
+                    throw new ArgumentException("The specified page is already registered.");
+                if (pages_.Values.Any(v => v == page))
+                    throw new ArgumentException("The specified view has already been registered under another name.");
+                pages_.Add(pageString, page);
+                
+            }
+            lock (viewModels_)
+            {
+                if (viewModels_.ContainsKey(pageString))
+                    throw new ArgumentException("The specified page is already registered.");
+                if (viewModels_.Values.Any(v => v == viewModel))
+                    throw new ArgumentException("The specified viewModel has already been registered under another name.");
+                viewModels_.Add(pageString, viewModel);
+            }
+        }
+        public bool NavigateShellFrame(string ToWhichString)
         {
             if (ShellFrame == null)
-            {
-                ShellFrame = ((Window.Current.Content as Frame)?.Content as ShellPage)?.AppFrame;
-                ShellFrame.Navigated += OnNavigated;
-            }
+                SetShellFrame();
 
-            var context = new NavigationContext(typeof(TViewModel), parameter);
-            return ShellFrame.Navigate(typeof(TView), context);
+            Type page = pages_[ToWhichString];
+            Type viewModel = viewModels_[ToWhichString];
+            NavigationContext context= new NavigationContext(viewModel,null);
+            
+            return ShellFrame.Navigate(page, context);
+        }
+        private void SetShellFrame()
+        {
+            ShellFrame = ((Window.Current.Content as Frame)?.Content as ShellPage)?.AppFrame;
+            ShellFrame.Navigated += OnNavigated;
         }
 
 
@@ -67,8 +96,8 @@ namespace Full_Arch_UWP_Autofac.Helpers
         {
             get
             {                
-                var mainFrame = frame;
-                if (mainFrame.Content == null)
+                var mainFrame = ShellFrame;
+                if (mainFrame == null || mainFrame.Content == null)
                     return UnknownPage;
 
                 var frameString = mainFrame.Content.ToString();

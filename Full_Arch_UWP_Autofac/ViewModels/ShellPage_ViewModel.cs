@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using System.Diagnostics;
 using Full_Arch_UWP_Autofac.Helpers;
-using Full_Arch_UWP_Autofac.Views;
 
 namespace Full_Arch_UWP_Autofac.ViewModels
 {
@@ -20,21 +19,21 @@ namespace Full_Arch_UWP_Autofac.ViewModels
 
         public Boolean MainPageSelected
         {
-            get { return Navigation.CurrentPage == "Main_Page"; }
+            //get {return Navigation.CurrentPage == "MainPage"; }
             set
             {
                 if (value)
-                    Navigation.NavigateShellFrame<MainPage,MainPage_ViewModel>();
+                    Navigation.NavigateShellFrame("MainPage");
             }
         }
 
         public Boolean OtherPageSelected
         {
-            get { return Navigation.CurrentPage == "Other_Page"; }
+            //get { return Navigation.CurrentPage == "OtherPage"; }
             set
             {
                 if (value)
-                    Navigation.NavigateShellFrame<OtherPage,OtherPage_ViewModel>();
+                    Navigation.NavigateShellFrame("OtherPage");
             }
         }
 

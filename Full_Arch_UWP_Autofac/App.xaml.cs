@@ -58,15 +58,15 @@ namespace Full_Arch_UWP_Autofac
 
 
             //ViewModels as well:
-            containerBuilder.RegisterType<ShellPage_ViewModel>().AsSelf();
+            containerBuilder.RegisterType<ShellPage_ViewModel>().AsSelf().SingleInstance();
             containerBuilder.RegisterType<MainPage_ViewModel>().AsSelf();
             containerBuilder.RegisterType<OtherPage_ViewModel>().AsSelf();
 
             //Navigation:
-            containerBuilder.RegisterType<DefaultFrameProvider>().As<IFrameProvider>().SingleInstance();
+            containerBuilder.RegisterType<DefaultFrameProvider>().As<IFrameProvider>();
             containerBuilder.RegisterType<ViewModelBinder>().As<IViewModelBinder>().SingleInstance();
             containerBuilder.RegisterType<AutofacServiceProvider>().As<IServiceProvider>();
-            containerBuilder.RegisterType<NavigationService>().AsSelf().As<INavigationService>();
+            containerBuilder.RegisterType<NavigationService>().AsSelf().As<INavigationService>().SingleInstance();
 
             var container = containerBuilder.Build();
             return container;
@@ -96,13 +96,10 @@ namespace Full_Arch_UWP_Autofac
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
-            //**Activating viewModelBinder and Navigation service
-            var binder = Container.Resolve<IViewModelBinder>();
-            binder.Configure("ShellPage", "ShellPage_ViewModel");
-            binder.Configure("MainPage", "MainPage_ViewModel");
-            binder.Configure("OtherPage", "OtherPage_ViewModel");
-
+            //**Activating Navigation service, and configure non-shellpage references
             var service = Container.Resolve<INavigationService>();
+            service.ConfigureBindings("MainPage", typeof(MainPage), typeof(MainPage_ViewModel));
+            service.ConfigureBindings("OtherPage", typeof(OtherPage), typeof(OtherPage_ViewModel));
 
             if (e.PrelaunchActivated == false)
             {

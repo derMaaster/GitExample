@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using System;
+using Windows.UI.Xaml.Controls;
 
 namespace Full_Arch_UWP_Autofac.Helpers
 {
@@ -9,7 +10,8 @@ namespace Full_Arch_UWP_Autofac.Helpers
 
 
         // Additions:
-        bool NavigateShellFrame<TView, TViewModel>(object parameter = null) where TView : Page;
+        void ConfigureBindings(string pageString, Type page, Type viewModel);
+        bool NavigateShellFrame(string ToWhichString);
         string CurrentPage { get; }
     }
 }
