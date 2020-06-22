@@ -27,6 +27,11 @@
                                  Style="{StaticResource AllStarNavigationButtonStyle}"
                                  IsChecked="{Binding OtherPageSelected, Mode=TwoWay}"
                                  Tag="&#59189;"/>
+                    <RadioButton x:Name="Option3"
+                                 GroupName="Group1"
+                                 Style="{StaticResource AllStarNavigationButtonStyle}"
+                                 IsChecked="{Binding DataGridPageSelected, Mode=TwoWay}"
+                                 Tag="&#59165;"/>
                 </StackPanel>
             </Grid>
 
@@ -47,3 +52,4 @@
         </SplitView.Content>
     </SplitView>
 </Page>
+<!--Segoe MDL Assets-->

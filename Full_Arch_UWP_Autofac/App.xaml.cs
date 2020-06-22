@@ -1,20 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
 using Autofac;
 using Full_Arch_UWP_Autofac.Views;
 using Full_Arch_UWP_Autofac.ViewModels;
@@ -61,6 +50,7 @@ namespace Full_Arch_UWP_Autofac
             containerBuilder.RegisterType<ShellPage_ViewModel>().AsSelf().SingleInstance();
             containerBuilder.RegisterType<MainPage_ViewModel>().AsSelf();
             containerBuilder.RegisterType<OtherPage_ViewModel>().AsSelf();
+            containerBuilder.RegisterType<DataGridPage_ViewModel>().AsSelf();
 
             //Navigation:
             containerBuilder.RegisterType<DefaultFrameProvider>().As<IFrameProvider>();
@@ -71,8 +61,7 @@ namespace Full_Arch_UWP_Autofac
             var container = containerBuilder.Build();
             return container;
         }
-
-
+        
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
@@ -100,6 +89,7 @@ namespace Full_Arch_UWP_Autofac
             var service = Container.Resolve<INavigationService>();
             service.ConfigureBindings("MainPage", typeof(MainPage), typeof(MainPage_ViewModel));
             service.ConfigureBindings("OtherPage", typeof(OtherPage), typeof(OtherPage_ViewModel));
+            service.ConfigureBindings("DataGridPage", typeof(DataGridPage), typeof(DataGridPage_ViewModel));
 
             if (e.PrelaunchActivated == false)
             {
@@ -123,15 +113,15 @@ namespace Full_Arch_UWP_Autofac
             }
         }
 
-    /// <summary>
-    /// Invoked when Navigation to a certain page fails
-    /// </summary>
-    /// <param name="sender">The Frame which failed navigation</param>
-    /// <param name="e">Details about the navigation failure</param>
-    void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
-        {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
-        }
+        /// <summary>
+        /// Invoked when Navigation to a certain page fails
+        /// </summary>
+        /// <param name="sender">The Frame which failed navigation</param>
+        /// <param name="e">Details about the navigation failure</param>
+        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+            {
+                throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+            }
 
         /// <summary>
         /// Invoked when application execution is being suspended.  Application state is saved
