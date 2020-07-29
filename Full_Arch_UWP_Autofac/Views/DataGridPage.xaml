@@ -28,7 +28,7 @@
                       Margin="2,0,2,2"
                       PlaceholderText="DataSource"
                       ItemsSource="{Binding DataSources}"
-                      SelectedValue="{Binding TableComboboxSelection,Mode=TwoWay}">
+                      SelectedValue="{Binding DataComboboxSelection,Mode=TwoWay}">
                 <interact:Interaction.Behaviors>
                     <interactcore:EventTriggerBehavior EventName="SelectionChanged">
                         <interactcore:InvokeCommandAction

@@ -9,7 +9,7 @@ using Full_Arch_UWP_Autofac.Views;
 using Full_Arch_UWP_Autofac.ViewModels;
 using Full_Arch_UWP_Autofac.Helpers;
 using Test_Core.Domain;
-using Test_Core.ServiceLayer;
+using Test_Core.Application;
 
 //https://stackoverflow.com/questions/49843225/how-to-use-autofac-in-an-uwp-app
 

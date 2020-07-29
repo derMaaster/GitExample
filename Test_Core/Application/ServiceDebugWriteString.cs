@@ -4,7 +4,7 @@ using System.Text;
 
 using Test_Core.Domain;
 
-namespace Test_Core.ServiceLayer
+namespace Test_Core.Application
 {
     public class ServiceDebugWriteString:IService_DebugWriteString
     {

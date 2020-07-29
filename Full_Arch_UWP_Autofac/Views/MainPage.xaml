@@ -20,6 +20,28 @@
             <TextBox Text="{Binding TextBoxText,Mode=TwoWay}"
                      Margin="10"
                      PlaceholderText="write someting 'ere for da system debug read..."/>
+            <Button x:Name="ButtonRunLoopTest"
+                    Content="Run Loop Testing"
+                    Command="{Binding ButtonClickCommand}"
+                    CommandParameter="{Binding ElementName=ButtonRunLoopTest}"
+                    Margin="10,10,0,0"/>
+            <Button x:Name="ButtonCallCancellationToken"
+                    Content="Call CancellationToken"
+                    Command="{Binding ButtonClickCommand}"
+                    CommandParameter="{Binding ElementName=ButtonCallCancellationToken}"
+                    Margin="10,10,0,0"/>
+            <ListView x:Name="InfoScroller"
+                      Background="LightGray" BorderBrush="#FF707070"
+                      BorderThickness="0"
+                      Height="300" Margin="5"
+                      Foreground="Black" FontSize="10"
+                      ItemsSource="{Binding ListData}">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
 
         </StackPanel>
 

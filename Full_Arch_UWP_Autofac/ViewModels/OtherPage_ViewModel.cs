@@ -1,24 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
-using System.Diagnostics;
 using Full_Arch_UWP_Autofac.Helpers;
-using Test_Core.ServiceLayer;
+using Test_Core.Application;
+using Windows.Storage;
+using Test_Core.Repositories;
+using System.Threading.Tasks;
 
 namespace Full_Arch_UWP_Autofac.ViewModels
 {
     public class OtherPage_ViewModel:NotificationBaseHelper
     {
-        public IService_GetSecretString _ServiceGetSecretString { get; }
+        public IService_GetSecretString ServiceGetSecretString_ { get; }
+        public IFileAccess fileAccess;
         public MyICommand<Button> OtherButtonClickCommand { get; private set; }
 
-        public OtherPage_ViewModel(IService_GetSecretString service_GetSecretString)
+        public OtherPage_ViewModel()
         {
             OtherButtonClickCommand = new MyICommand<Button>(ButtonClicked);
-            _ServiceGetSecretString = service_GetSecretString;
+            ServiceGetSecretString_ = new ServiceGetSecretString();
+            fileAccess = new FileAccess();
         }
 
         private string _TextBoxText;
@@ -34,9 +34,39 @@ namespace Full_Arch_UWP_Autofac.ViewModels
             switch (buttonName)
             {
                 case "ButtonGetSecret":
-                    TextBoxText = _ServiceGetSecretString.GetString();
+                    TextBoxText = ServiceGetSecretString_.GetString();
+                    break;
+                case "ButtonGetNetStandardFolder":
+                    TextBoxText = GetNetStandardFolder();
+                    break;
+                case "ButtonCreateFolder":
+                    TextBoxText = CreateFolder();
                     break;
             }
         }
+        public async Task<string> CreateFileInStorageFolder()
+        {
+            //                case "ButtonGetAppStorageFolder":
+            //        TextBoxText = CreateFileInStorageFolder();
+            //break;
+
+            UWPStorageFolder uWPStorageFolder = new UWPStorageFolder();
+            var result = await uWPStorageFolder.CreateFileInStorageFolder();
+            //var resultString = await result;
+
+            return result;
+        }
+        public string GetNetStandardFolder()
+        {
+            //bool result = fileAccess.CreateFileTest();
+            //return result.ToString();
+            return "what";
+        }
+        public string CreateFolder()
+        {
+            string result = fileAccess.CreateFileTest();
+            return result;
+        }
+
     }
 }

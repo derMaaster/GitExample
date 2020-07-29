@@ -1,14 +1,14 @@
 ﻿
 using Test_Core.Domain;
 
-namespace Test_Core.ServiceLayer
+namespace Test_Core.Application
 {
     public class ServiceGetSecretString:IService_GetSecretString
     {
         public IDomain_GetSecretString I_GetSecretString { get; }
-        public ServiceGetSecretString(IDomain_GetSecretString i_GetSecretString)
+        public ServiceGetSecretString()
         {
-            I_GetSecretString = i_GetSecretString;
+            I_GetSecretString = new DomainGetSecretString();
         }
 
         public string GetString()

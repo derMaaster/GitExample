@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Controls;
 using System.Data;
 using Full_Arch_UWP_Autofac.Helpers;
+using NodaTime;
+
 
 namespace Full_Arch_UWP_Autofac.ViewModels
 {
@@ -44,12 +46,16 @@ namespace Full_Arch_UWP_Autofac.ViewModels
                 case "Mense":
                     MainListData = KryMense();
                     break;
+                case "InstantDoubleString":
+                    MainListData = InstantDoubleString();
+                    break;
             }
         }
         public void LoadDataSourcesCombobox()
         {
             DataSources.Add("Karre");
             DataSources.Add("Mense");
+            DataSources.Add("InstantDoubleString");
         }
         public ObservableCollection<Karre> KryKarre() 
         {
@@ -74,6 +80,18 @@ namespace Full_Arch_UWP_Autofac.ViewModels
 
             return mense;
         }
+        public ObservableCollection<InstantDoubleStringUint> InstantDoubleString()
+        {
+            IClock clock = SystemClock.Instance;
+
+            ObservableCollection<InstantDoubleStringUint> mense = new ObservableCollection<InstantDoubleStringUint>();
+            mense.Add(new InstantDoubleStringUint { Tyd = clock.GetCurrentInstant(), Nommer = 234656, Teks = "Einstein en Linda wa jy" });
+            mense.Add(new InstantDoubleStringUint { Tyd = clock.GetCurrentInstant(), Nommer = 23, Teks = "fooooooook" });
+            mense.Add(new InstantDoubleStringUint { Tyd = clock.GetCurrentInstant(), Nommer = 26, Teks = "gaan die instant post?" });
+            mense.Add(new InstantDoubleStringUint { Tyd = clock.GetCurrentInstant(), Nommer = 213466777888, Teks = "hostaaa fo... re rof taaal" });
+
+            return mense;
+        }
     }
 
     public class Karre
@@ -87,5 +105,11 @@ namespace Full_Arch_UWP_Autofac.ViewModels
         public string Onfiks { get; set; }
         public string Slim { get; set; }
         public string Katte { get; set; }
+    }
+    public class InstantDoubleStringUint
+    {
+        public Instant Tyd { get; set; }
+        public double Nommer { get; set; }
+        public string Teks { get; set; }
     }
 }

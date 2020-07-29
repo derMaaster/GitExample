@@ -16,6 +16,24 @@
                     CommandParameter="{Binding ElementName=ButtonGetSecret}"
                     Margin="10,10,0,0">
             </Button>
+            <Button x:Name="ButtonGetAppStorageFolder"
+                    Content="Get this app's storage folder directory"
+                    Command="{Binding OtherButtonClickCommand}"
+                    CommandParameter="{Binding ElementName=ButtonGetAppStorageFolder}"
+                    Margin="10,10,0,0">
+            </Button>
+            <Button x:Name="ButtonGetNetStandardFolder"
+                    Content="Get the NetStandard project source code folder?"
+                    Command="{Binding OtherButtonClickCommand}"
+                    CommandParameter="{Binding ElementName=ButtonGetNetStandardFolder}"
+                    Margin="10,10,0,0">
+            </Button>
+            <Button x:Name="ButtonCreateFolder"
+                    Content="Create file in solution source code folder"
+                    Command="{Binding OtherButtonClickCommand}"
+                    CommandParameter="{Binding ElementName=ButtonCreateFolder}"
+                    Margin="10,10,0,0">
+            </Button>
             <TextBox Text="{Binding TextBoxText,Mode=OneWay}"
                      Margin="10"
                      PlaceholderText="click button to load this textblock with secret text..."/>

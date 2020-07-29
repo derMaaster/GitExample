@@ -37,18 +37,43 @@
 
         </SplitView.Pane>
         <SplitView.Content>
-
-            <Frame x:Name="Content">
-                <Frame.ContentTransitions>
-                    <TransitionCollection>
-                        <NavigationThemeTransition>
-                            <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                                <EntranceNavigationTransitionInfo/>
-                            </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                        </NavigationThemeTransition>
-                    </TransitionCollection>
-                </Frame.ContentTransitions>
-            </Frame>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Frame x:Name="Content"
+                       Grid.Row="0">
+                    <Frame.ContentTransitions>
+                        <TransitionCollection>
+                            <NavigationThemeTransition>
+                                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                    <EntranceNavigationTransitionInfo/>
+                                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                            </NavigationThemeTransition>
+                        </TransitionCollection>
+                    </Frame.ContentTransitions>
+                </Frame>
+                <StackPanel Grid.Row="1">
+                    <ScrollViewer x:Name="InfoScroller"
+                        Background="LightGray"
+                        BorderBrush="#FF707070"
+                        BorderThickness="0"
+                        VerticalScrollBarVisibility="Auto"
+                        Height="110">
+                    </ScrollViewer>
+                    <CommandBar IsOpen="True"
+                                IsSticky="True"
+                                Height="30"
+                                Background="Gray">
+                        <CommandBar.Content>
+                            <TextBlock Text="Connection status, app time, CPU usage etc"
+                                       Margin="5,2,2,2">
+                            </TextBlock>
+                        </CommandBar.Content>
+                    </CommandBar>
+                </StackPanel>
+            </Grid>
         </SplitView.Content>
     </SplitView>
 </Page>
