@@ -1,4 +1,5 @@
 ﻿using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using System.Diagnostics;
 using Full_Arch_UWP_Autofac.Helpers;
 using Test_Core.Application;
@@ -21,21 +22,47 @@ namespace Full_Arch_UWP_Autofac.ViewModels
         System.Timers.Timer aTimer;
         int LoopCounter;
 
+        private string _TextBoxText;
+        private Boolean ToggleButtonBool_;
+        public string TextBoxText
+        {
+            get { return _TextBoxText; }
+            set { SetProperty(ref _TextBoxText, value); }
+        }
+        public Boolean ToggleButtonBool
+        {
+            get { return ToggleButtonBool_; }
+            set { SetProperty(ref ToggleButtonBool_, value); }
+        }
+
         public IService_DebugWriteString _ServiceDebugWriteString { get; }
         public MyICommand<Button> ButtonClickCommand { get; private set; }
+        public MyICommand<ToggleButton> ToggleButtonClickCommand { get; private set; }
         public ObservableCollection<string> ListData { get; set; } = new ObservableCollection<string>();
 
         public MainPage_ViewModel(IService_DebugWriteString i_DebugWriteString)
         {
             ButtonClickCommand = new MyICommand<Button>(ButtonClicked);
+            ToggleButtonClickCommand = new MyICommand<ToggleButton>(ToggleButtonClicked);
+
             _ServiceDebugWriteString = i_DebugWriteString;
+
+            _ServiceDebugWriteString.PropertyChanged += _ServiceDebugWriteString_PropertyChanged;
+
+            CheckStartupStatus();
         }
 
-        private string _TextBoxText;
-        public string TextBoxText
+        private void _ServiceDebugWriteString_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            get { return _TextBoxText; }
-            set { SetProperty(ref _TextBoxText, value); }
+            if (e.PropertyName == "TestINPC")
+            {
+                ServiceDebugWriteString serviceDebugWriteString = (ServiceDebugWriteString)sender;
+                this.ToggleButtonBool = serviceDebugWriteString.TestINPC;
+            }
+        }
+        private void CheckStartupStatus()
+        {
+            ToggleButtonBool = _ServiceDebugWriteString.GetStatusBool();
         }
 
         
@@ -53,10 +80,23 @@ namespace Full_Arch_UWP_Autofac.ViewModels
                 case "ButtonCallCancellationToken":
                     CallSourceCancel();
                     break;
+                case "ButtonTestINPC":
+                    _ServiceDebugWriteString.WriteString("whatever here for test");
+                    break;
+                    
             }
         }
-
-
+        private void ToggleButtonClicked(ToggleButton toggleButton)
+        {
+            if (ToggleButtonBool)
+            {
+                _ServiceDebugWriteString.WriteString("Start indicated");
+            }
+            else
+            {
+                _ServiceDebugWriteString.WriteString("STOP indicated");
+            }
+        }
         public void StartLoopProcedure()
         {
             LoopCounter = 0;

@@ -22,7 +22,7 @@
             <ColumnDefinition Width="300"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <RelativePanel Grid.Column="0">
+        <StackPanel Grid.Column="0">
             <ComboBox x:Name="DataComboBox"
                       Width="296"
                       Margin="2,0,2,2"
@@ -37,7 +37,15 @@
                     </interactcore:EventTriggerBehavior>
                 </interact:Interaction.Behaviors>
             </ComboBox>
-        </RelativePanel>
+            <Button x:Name="ButtonCancelAll"
+                    Command="{Binding ButtonClicked_Command}"
+                    CommandParameter="{Binding ElementName=ButtonCancelAll}"
+                    Margin="5,10,5,0"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Background="Gray" Height="30"
+                    Content="Place Button Text Here"/>
+            </StackPanel>
+
         <controls:DataGrid Grid.Column="1"
                            Background="Gray"
                            ItemsSource="{Binding MainListData}"

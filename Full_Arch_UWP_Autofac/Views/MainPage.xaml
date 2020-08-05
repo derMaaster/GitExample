@@ -5,6 +5,10 @@
     xmlns:local="using:Full_Arch_UWP_Autofac.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
+    xmlns:interact="using:Microsoft.Xaml.Interactivity"
+    xmlns:interactcore="using:Microsoft.Xaml.Interactions.Core"
+    
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -42,7 +46,16 @@
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
             </ListView>
+            <ToggleButton x:Name="ToggleButtonRuleOne"
+                          Width="200" Height="50"
+                          Command="{Binding ToggleButtonClickCommand}"
+                          CommandParameter="{Binding ElementName=ToggleButtonRuleOne}"
+                          IsChecked="{Binding ToggleButtonBool, Mode=TwoWay}"
+                          Margin="5,5,5,5">
+                <TextBlock x:Name="IsUnCheckedText">
 
+                </TextBlock>
+            </ToggleButton>
         </StackPanel>
 
     </Grid>
