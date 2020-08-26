@@ -32,6 +32,11 @@
                                  Style="{StaticResource AllStarNavigationButtonStyle}"
                                  IsChecked="{Binding DataGridPageSelected, Mode=TwoWay}"
                                  Tag="&#59165;"/>
+                    <RadioButton x:Name="Option4"
+                                 GroupName="Group1"
+                                 Style="{StaticResource AllStarNavigationButtonStyle}"
+                                 IsChecked="{Binding ListViewPageSelected, Mode=TwoWay}"
+                                 Tag="&#xE709;"/>
                 </StackPanel>
             </Grid>
 

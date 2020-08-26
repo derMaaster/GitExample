@@ -6,8 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     
-    xmlns:interact="using:Microsoft.Xaml.Interactivity"
-    xmlns:interactcore="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:InteractCore="using:Microsoft.Xaml.Interactions.Core"
     
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -52,7 +52,8 @@
                           CommandParameter="{Binding ElementName=ToggleButtonRuleOne}"
                           IsChecked="{Binding ToggleButtonBool, Mode=TwoWay}"
                           Margin="5,5,5,5">
-                <TextBlock x:Name="IsUnCheckedText">
+                <TextBlock x:Name="CheckedText"
+                           Text="Start / Stop">
 
                 </TextBlock>
             </ToggleButton>

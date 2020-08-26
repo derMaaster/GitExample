@@ -22,6 +22,10 @@
             <ColumnDefinition Width="300"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="500"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <StackPanel Grid.Column="0">
             <ComboBox x:Name="DataComboBox"
                       Width="296"
@@ -37,21 +41,81 @@
                     </interactcore:EventTriggerBehavior>
                 </interact:Interaction.Behaviors>
             </ComboBox>
-            <Button x:Name="ButtonCancelAll"
+
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <Button x:Name="ButtonLoadTradeInstrumente"
                     Command="{Binding ButtonClicked_Command}"
-                    CommandParameter="{Binding ElementName=ButtonCancelAll}"
+                    CommandParameter="{Binding ElementName=ButtonLoadTradeInstrumente}"
                     Margin="5,10,5,0"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                     Background="Gray" Height="30"
-                    Content="Place Button Text Here"/>
-            </StackPanel>
+                    Content="Laai Trade Instrumente Tabel"/>
+            <Button x:Name="ButtonOpdateerTradeInstrumente"
+                    Command="{Binding ButtonClicked_Command}"
+                    CommandParameter="{Binding ElementName=ButtonOpdateerTradeInstrumente}"
+                    Margin="5,10,5,0"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Background="Gray" Height="30"
+                    Content="Opdateer Trade Instrumente Tabel"
+                    />
+        </StackPanel>
 
         <controls:DataGrid Grid.Column="1"
                            Background="Gray"
                            ItemsSource="{Binding MainListData}"
                            AutoGenerateColumns="True"
                            GridLinesVisibility="All"
-                           AlternatingRowBackground="LightGray">
+                           AlternatingRowBackground="Gray">
         </controls:DataGrid>
+        <controls:DataGrid Grid.Row="1" Grid.Column="1"
+                           ItemsSource="{Binding TradeInstrumente,Mode=TwoWay}"
+                           AutoGenerateColumns="True"
+                           GridLinesVisibility="All"
+                           AlternatingRowBackground="LightGray">
+            <controls:DataGrid.Columns>
+                <controls:DataGridTextColumn
+                    Header="MonthID"
+                    Width="SizeToHeader"
+                    Binding="{Binding MonthID,Mode=TwoWay}"
+                    FontSize="10"/>
+                <controls:DataGridTextColumn
+                    Header="Outright"
+                    Width="SizeToHeader"
+                    Binding="{Binding Outright,Mode=TwoWay}"
+                    FontSize="10"/>
+                <controls:DataGridTextColumn
+                    Header="OutrightCode"
+                    Width="SizeToHeader"
+                    Binding="{Binding OutrightCode,Mode=TwoWay}"
+                    FontSize="10"/>
+                <controls:DataGridTextColumn
+                    Header="Delta"
+                    Width="SizeToHeader"
+                    Binding="{Binding Delta,Mode=TwoWay}"
+                    FontSize="10"/>
+                <controls:DataGridTextColumn
+                    Header="DeltaCode"
+                    Width="SizeToHeader"
+                    Binding="{Binding DeltaCode,Mode=TwoWay}"
+                    FontSize="10"/>
+                <controls:DataGridTextColumn
+                    Header="Future"
+                    Width="SizeToHeader"
+                    Binding="{Binding Future,Mode=TwoWay}"
+                    FontSize="10"/>
+                <controls:DataGridTextColumn
+                    Header="FutureCode"
+                    Width="SizeToHeader"
+                    Binding="{Binding FutureCode,Mode=TwoWay}"
+                    FontSize="10"/>
+                <controls:DataGridTextColumn
+                    Header="OptionExpiry"
+                    Width="SizeToHeader"
+                    Binding="{Binding OptionExpiry,Mode=TwoWay}"
+                    FontSize="10"/>
+            </controls:DataGrid.Columns>
+        </controls:DataGrid>
+
     </Grid>
 </Page>

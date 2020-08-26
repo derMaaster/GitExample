@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Controls;
 using System.Data;
+using Test_Core.Application;
 using Full_Arch_UWP_Autofac.Helpers;
 using NodaTime;
 
@@ -16,9 +18,18 @@ namespace Full_Arch_UWP_Autofac.ViewModels
             get { return MainListData_; }
             set { SetProperty(ref MainListData_, value); }
         }
+        private object TradeInstrumente_;
+        public object TradeInstrumente
+        {
+            get { return TradeInstrumente_; }
+            set { SetProperty(ref TradeInstrumente_, value); }
+        }
+
 
         public ObservableCollection<string> DataSources { get; } = new ObservableCollection<string>();
+        //public ObservableCollection<TradeInstrumente> TradeInstrumente { get; set; } = new ObservableCollection<TradeInstrumente>();
         public MyICommand<ComboBox> ComboboxSelectionChanged_Command { get; private set; }
+        public MyICommand<Button> ButtonClicked_Command { get; private set; }
 
         private string DataComboboxSelection_;
         public string DataComboboxSelection
@@ -32,6 +43,7 @@ namespace Full_Arch_UWP_Autofac.ViewModels
         {
             LoadDataSourcesCombobox();
             ComboboxSelectionChanged_Command = new MyICommand<ComboBox>(ComboboxSelectionChanged);
+            ButtonClicked_Command = new MyICommand<Button>(ButtonClicked);
         }
 
         public void ComboboxSelectionChanged(ComboBox comboBox)
@@ -48,6 +60,19 @@ namespace Full_Arch_UWP_Autofac.ViewModels
                     break;
                 case "InstantDoubleString":
                     MainListData = InstantDoubleString();
+                    break;
+            }
+        }
+        private void ButtonClicked(Button button)
+        {
+            string buttonName = button.Name;
+            switch (buttonName)
+            {
+                case "ButtonLoadTradeInstrumente":
+                    ButtonLoadTradingInstrumente();
+                    break;
+                case "ButtonOpdateerTradeInstrumente":
+                    ButtonOpdateerTradingData();
                     break;
             }
         }
@@ -92,6 +117,38 @@ namespace Full_Arch_UWP_Autofac.ViewModels
 
             return mense;
         }
+        private void ButtonLoadTradingInstrumente()
+        {
+            ObservableCollection<TradeInstrumente> tradeInstrumentes = new ObservableCollection<TradeInstrumente>();
+            tradeInstrumentes.Add(new TradeInstrumente
+            {
+                MonthID = "monthID1",
+                Outright = "outright1",
+                OutrightCode = "outrightCode1",
+                Delta = "Delta1",
+                DeltaCode = "DeltaCode1",
+                Future = "future1",
+                FutureCode = "futureCode1",
+                OptionExpiry = DateTime.Now
+            });
+            tradeInstrumentes.Add(new TradeInstrumente
+            {
+                MonthID = "monthID2",
+                Outright = "outright2",
+                OutrightCode = "outrightCode2",
+                Delta = "Delta2",
+                DeltaCode = "DeltaCode2",
+                Future = "future2",
+                FutureCode = "futureCode2",
+                OptionExpiry = DateTime.Now
+            });
+
+            TradeInstrumente = tradeInstrumentes;
+        }
+        private void ButtonOpdateerTradingData()
+        {
+
+        }
     }
 
     public class Karre
@@ -111,5 +168,16 @@ namespace Full_Arch_UWP_Autofac.ViewModels
         public Instant Tyd { get; set; }
         public double Nommer { get; set; }
         public string Teks { get; set; }
+    }
+    public class TradeInstrumente
+    {
+        public string MonthID { get; set; }
+        public string Outright { get; set; }
+        public string OutrightCode { get; set; }
+        public string Delta { get; set; }
+        public string DeltaCode { get; set; }
+        public string Future { get; set; }
+        public string FutureCode { get; set; }
+        public DateTime OptionExpiry { get; set; }
     }
 }

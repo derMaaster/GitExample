@@ -38,6 +38,15 @@ namespace Full_Arch_UWP_Autofac.ViewModels
                     Navigation.NavigateShellFrame("DataGridPage");
             }
         }
+        public Boolean ListViewPageSelected
+        {
+            get { return Navigation.CurrentPage == "ListViewPage"; }
+            set
+            {
+                if (value)
+                    Navigation.NavigateShellFrame("ListViewPage");
+            }
+        }
 
 
     }
