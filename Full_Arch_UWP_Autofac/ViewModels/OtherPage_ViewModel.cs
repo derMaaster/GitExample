@@ -3,6 +3,7 @@ using Windows.UI.Xaml.Controls;
 using Full_Arch_UWP_Autofac.Helpers;
 using Test_Core.Application;
 using Windows.Storage;
+
 using Test_Core.Repositories;
 using System.Threading.Tasks;
 
@@ -36,13 +37,25 @@ namespace Full_Arch_UWP_Autofac.ViewModels
                 case "ButtonGetSecret":
                     TextBoxText = ServiceGetSecretString_.GetString();
                     break;
-                case "ButtonGetNetStandardFolder":
-                    TextBoxText = GetNetStandardFolder();
+                case "ButtonGetLocalStorageFolder":
+                    TextBoxText = GetLocalStorageFolderString();
                     break;
                 case "ButtonCreateFolder":
                     TextBoxText = CreateFolder();
                     break;
+                case "ButtonGetAppStorageFolder":
+                    TextBoxText = GetAppStorageFolderString();
+                    break;                    
             }
+        }
+        private string GetAppStorageFolderString()
+        {
+            string location = "";
+            StorageFolder appFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+
+            location = appFolder.Name + " folder path: " + appFolder.Path;
+
+            return location;
         }
         public async Task<string> CreateFileInStorageFolder()
         {
@@ -56,11 +69,12 @@ namespace Full_Arch_UWP_Autofac.ViewModels
 
             return result;
         }
-        public string GetNetStandardFolder()
+        private string GetLocalStorageFolderString()
         {
-            //bool result = fileAccess.CreateFileTest();
-            //return result.ToString();
-            return "what";
+            string location = "";
+            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+            location = localFolder.Path;
+            return location;
         }
         public string CreateFolder()
         {

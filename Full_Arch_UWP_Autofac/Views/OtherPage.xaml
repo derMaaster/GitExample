@@ -17,15 +17,15 @@
                     Margin="10,10,0,0">
             </Button>
             <Button x:Name="ButtonGetAppStorageFolder"
-                    Content="Get this app's storage folder directory"
+                    Content="Get this app's install directory"
                     Command="{Binding OtherButtonClickCommand}"
                     CommandParameter="{Binding ElementName=ButtonGetAppStorageFolder}"
                     Margin="10,10,0,0">
             </Button>
-            <Button x:Name="ButtonGetNetStandardFolder"
-                    Content="Get the NetStandard project source code folder?"
+            <Button x:Name="ButtonGetLocalStorageFolder"
+                    Content="Get app local storage access location?"
                     Command="{Binding OtherButtonClickCommand}"
-                    CommandParameter="{Binding ElementName=ButtonGetNetStandardFolder}"
+                    CommandParameter="{Binding ElementName=ButtonGetLocalStorageFolder}"
                     Margin="10,10,0,0">
             </Button>
             <Button x:Name="ButtonCreateFolder"
