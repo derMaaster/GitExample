@@ -51,7 +51,7 @@ namespace Full_Arch_UWP_Autofac
             containerBuilder.RegisterType<MainPage_ViewModel>().AsSelf();
             containerBuilder.RegisterType<OtherPage_ViewModel>().AsSelf();
             containerBuilder.RegisterType<DataGridPage_ViewModel>().AsSelf();
-            containerBuilder.RegisterType<ListViewPage_ViewModel>().AsSelf();
+            containerBuilder.RegisterType<FakeRulePage_ViewModel>().AsSelf();
 
             //Navigation:
             containerBuilder.RegisterType<DefaultFrameProvider>().As<IFrameProvider>();
@@ -91,7 +91,7 @@ namespace Full_Arch_UWP_Autofac
             service.ConfigureBindings("MainPage", typeof(MainPage), typeof(MainPage_ViewModel));
             service.ConfigureBindings("OtherPage", typeof(OtherPage), typeof(OtherPage_ViewModel));
             service.ConfigureBindings("DataGridPage", typeof(DataGridPage), typeof(DataGridPage_ViewModel));
-            service.ConfigureBindings("ListViewPage", typeof(ListViewPage), typeof(ListViewPage_ViewModel));
+            service.ConfigureBindings("FakeRulePage", typeof(FakeRulePage), typeof(FakeRulePage_ViewModel));
 
             if (e.PrelaunchActivated == false)
             {

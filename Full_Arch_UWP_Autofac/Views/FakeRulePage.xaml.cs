@@ -20,9 +20,9 @@ namespace Full_Arch_UWP_Autofac.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ListViewPage : Page
+    public sealed partial class FakeRulePage : Page
     {
-        public ListViewPage()
+        public FakeRulePage()
         {
             this.InitializeComponent();
         }

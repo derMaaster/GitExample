@@ -35,7 +35,7 @@
                     <RadioButton x:Name="Option4"
                                  GroupName="Group1"
                                  Style="{StaticResource AllStarNavigationButtonStyle}"
-                                 IsChecked="{Binding ListViewPageSelected, Mode=TwoWay}"
+                                 IsChecked="{Binding FakeRulePageSelected, Mode=TwoWay}"
                                  Tag="&#xE709;"/>
                 </StackPanel>
             </Grid>

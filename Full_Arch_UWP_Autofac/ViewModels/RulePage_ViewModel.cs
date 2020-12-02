@@ -11,7 +11,7 @@ using System.ComponentModel;
 
 namespace Full_Arch_UWP_Autofac.ViewModels
 {
-    public class ListViewPage_ViewModel:NotificationBaseHelper
+    public class RulePage_ViewModel:NotificationBaseHelper
     {
         private string DataComboboxSelection_;
         public string DataComboboxSelection
@@ -25,7 +25,7 @@ namespace Full_Arch_UWP_Autofac.ViewModels
         public ObservableCollection<Karre> ListData { get { return this.listData; } }
 
         public MyICommand<ComboBox> ComboboxSelectionChanged_Command { get; private set; }
-        public ListViewPage_ViewModel()
+        public RulePage_ViewModel()
         {
             LoadDataSourcesCombobox();
             ComboboxSelectionChanged_Command = new MyICommand<ComboBox>(ComboboxSelectionChanged);

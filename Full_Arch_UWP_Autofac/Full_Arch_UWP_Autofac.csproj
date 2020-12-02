@@ -133,16 +133,18 @@
     <Compile Include="ShellPage.xaml.cs">
       <DependentUpon>ShellPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DataClasses\RBTATMRules_Data.cs" />
+    <Compile Include="ViewModels\DataClasses\RBTStrikeRule_Data.cs" />
     <Compile Include="ViewModels\DataGridPage_ViewModel.cs" />
-    <Compile Include="ViewModels\ListViewPage_ViewModel.cs" />
+    <Compile Include="ViewModels\FakeRulePage_ViewModel.cs" />
     <Compile Include="ViewModels\MainPage_ViewModel.cs" />
     <Compile Include="ViewModels\OtherPage_ViewModel.cs" />
     <Compile Include="ViewModels\ShellPage_ViewModel.cs" />
     <Compile Include="Views\DataGridPage.xaml.cs">
       <DependentUpon>DataGridPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ListViewPage.xaml.cs">
-      <DependentUpon>ListViewPage.xaml</DependentUpon>
+    <Compile Include="Views\FakeRulePage.xaml.cs">
+      <DependentUpon>FakeRulePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -208,7 +210,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ListViewPage.xaml">
+    <Page Include="Views\FakeRulePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
