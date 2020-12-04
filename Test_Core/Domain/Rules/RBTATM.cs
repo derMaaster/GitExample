@@ -8,7 +8,7 @@ namespace Test_Core.Domain
 {
     public class RBTATM:RuleBase
     {
-        public double Wins;
+        
 
         public RBTATM(string ruleID)
         {
@@ -17,14 +17,6 @@ namespace Test_Core.Domain
             ID = ruleID;
         }
 
-        public async Task RunFakeRule()
-        {
-            while (!ExitRule)
-            {
-                // do work in rule to get somewhere in life:
-                await Task.Delay(100);
-            }
-            InfoINPC = "End of RunFakeRule(): " + ID;
-        }
+
     }
 }

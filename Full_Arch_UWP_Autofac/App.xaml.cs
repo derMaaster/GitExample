@@ -41,10 +41,10 @@ namespace Full_Arch_UWP_Autofac
             //      domain:
             containerBuilder.RegisterType<DomainDebugWriteString>().As<IDomain_WriteString>();
             containerBuilder.RegisterType<DomainGetSecretString>().As<IDomain_GetSecretString>();
-            //      serviceLayer:
+            //      serviceLayer/application layer:
             containerBuilder.RegisterType<ServiceDebugWriteString>().As<IService_DebugWriteString>();
             containerBuilder.RegisterType<ServiceGetSecretString>().As<IService_GetSecretString>();
-
+            containerBuilder.RegisterType<FakeRule_Engine>().As<IFakeRule_Engine>().SingleInstance();
 
             //ViewModels as well:
             containerBuilder.RegisterType<ShellPage_ViewModel>().AsSelf().SingleInstance();

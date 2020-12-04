@@ -9,5 +9,10 @@ namespace Test_Core.Domain
         Bid,
         Offer
     }
+    public enum RuleType
+    {
+        ATM,
+        Strike
+    }
 
 }

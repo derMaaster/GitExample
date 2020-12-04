@@ -5,19 +5,35 @@ using System.Text;
 using System.Threading.Tasks;
 using Full_Arch_UWP_Autofac.Helpers;
 using System.Collections.ObjectModel;
+using Test_Core.Application;
+using System.Diagnostics;
 
 namespace Full_Arch_UWP_Autofac.ViewModels
 {
     public class FakeRulePage_ViewModel:NotificationBaseHelper
     {
+        private readonly IFakeRule_Engine _fakeRuleEngine;
+
         public ObservableCollection<RBTATMRules_Data> RBTATMRules { get; set; } = new ObservableCollection<RBTATMRules_Data>();
         public ObservableCollection<RBTStrikeRule_Data> RBTStrikeRules { get; set; } = new ObservableCollection<RBTStrikeRule_Data>();
 
-        public FakeRulePage_ViewModel()
+        public FakeRulePage_ViewModel(
+            IFakeRule_Engine fakeRule_Engine)
         {
-            LoadRules();
+            _fakeRuleEngine = fakeRule_Engine;
+            _fakeRuleEngine.PropertyChanged += FakeRuleEngine_PropertyChanged;
+            
+            GetEngineRules();
         }
-        private void LoadRules()
+
+        private void FakeRuleEngine_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Debug.WriteLine("FakeRuleEngine_PropertyChanged... fired, e.PropertyName: " + e.PropertyName);
+            // vang as n Rule se Running status verander. Update die "lig" asook start/stop buttons
+            throw new NotImplementedException();
+        }
+
+        private void GetEngineRules()
         {
             var newATMRule = new RBTATMRules_Data()
             {

@@ -4,7 +4,7 @@ using System.Text;
 using Test_Core.Helpers;
 using System.Threading.Tasks;
 
-namespace Test_Core.Domain.Rules
+namespace Test_Core.Domain
 {
     public class RBTStrike : RuleBase
     {

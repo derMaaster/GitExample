@@ -21,7 +21,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0">
-            <controls:DataGrid Name="RBTATM" GridLinesVisibility="All" HorizontalGridLinesBrush="AliceBlue"
+            <controls:DataGrid Name="RBTATM" GridLinesVisibility="All"
                                AlternatingRowBackground="Gray" AutoGenerateColumns="False"
                                ItemsSource="{Binding RBTATMRules,Mode=TwoWay}">
                 <controls:DataGrid.Columns>
