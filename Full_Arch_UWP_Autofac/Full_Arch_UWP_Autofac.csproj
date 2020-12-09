@@ -133,8 +133,7 @@
     <Compile Include="ShellPage.xaml.cs">
       <DependentUpon>ShellPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\DataClasses\RBTATMRules_Data.cs" />
-    <Compile Include="ViewModels\DataClasses\RBTStrikeRule_Data.cs" />
+    <Compile Include="ViewModels\DataClasses\RBTRule_Data.cs" />
     <Compile Include="ViewModels\DataGridPage_ViewModel.cs" />
     <Compile Include="ViewModels\FakeRulePage_ViewModel.cs" />
     <Compile Include="ViewModels\MainPage_ViewModel.cs" />

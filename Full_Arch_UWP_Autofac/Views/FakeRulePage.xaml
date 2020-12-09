@@ -8,101 +8,55 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
         
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls">
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:interact="using:Microsoft.Xaml.Interactivity"
+    xmlns:interactcore="using:Microsoft.Xaml.Interactions.Core">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="650"/>
+            <ColumnDefinition Width="700"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="200"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0">
-            <controls:DataGrid Name="RBTATM" GridLinesVisibility="All"
-                               AlternatingRowBackground="Gray" AutoGenerateColumns="False"
-                               ItemsSource="{Binding RBTATMRules,Mode=TwoWay}">
-                <controls:DataGrid.Columns>
-                    <controls:DataGridTextColumn Header="Month" Binding="{Binding MonthID,Mode=TwoWay}"/>
-                    <controls:DataGridTextColumn Header="Qty" Binding="{Binding Qty,Mode=TwoWay}"/>
-                    <controls:DataGridTextColumn Header="Wins" Binding="{Binding Wins,Mode=TwoWay}"/>
-                    <controls:DataGridTextColumn Header="Vol" Binding="{Binding Vol,Mode=TwoWay}"/>
-                    <controls:DataGridTemplateColumn Header="Running">
-                        <controls:DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Button Content="Start"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </controls:DataGridTemplateColumn.CellTemplate>
-                    </controls:DataGridTemplateColumn>
-                    <controls:DataGridTemplateColumn Header="Start">
-                        <controls:DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Button Content="Start"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </controls:DataGridTemplateColumn.CellTemplate>
-                    </controls:DataGridTemplateColumn>
-                    <controls:DataGridTemplateColumn Header="Stop">
-                        <controls:DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Button Content="Stop"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </controls:DataGridTemplateColumn.CellTemplate>
-                    </controls:DataGridTemplateColumn>
-                </controls:DataGrid.Columns>
-            </controls:DataGrid>
-        </StackPanel>
-        
-        <StackPanel Grid.Row="1">
+        <StackPanel Grid.Row="0">
             <controls:DataGrid Name="RBTSnipe" GridLinesVisibility="All"
                                AlternatingRowBackground="Gray" AutoGenerateColumns="False"                               
-                               ItemsSource="{Binding RBTStrikeRules,Mode=TwoWay}">
+                               ItemsSource="{Binding RBTRules,Mode=TwoWay}">
                 <controls:DataGrid.Columns>
+                    <controls:DataGridTextColumn Header="RuleType" Binding="{Binding RuleType,Mode=TwoWay}"/>
                     <controls:DataGridTextColumn Header="Month" Binding="{Binding MonthID,Mode=TwoWay}"/>
                     <controls:DataGridTextColumn Header="Qty" Binding="{Binding Qty,Mode=TwoWay}"/>
-                    <controls:DataGridTextColumn Header="Xo" Binding="{Binding Xo,Mode=TwoWay}"/>
                     <controls:DataGridTextColumn Header="Vol" Binding="{Binding Vol,Mode=TwoWay}"/>
+                    <controls:DataGridTextColumn Header="Wins" Binding="{Binding Wins,Mode=TwoWay}"/>
+                    <controls:DataGridTextColumn Header="Xo" Binding="{Binding Xo,Mode=TwoWay}"/>
                     <controls:DataGridTemplateColumn Header="BidOffer">
                         <controls:DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <ComboBox>
-                                        
+                                    <ComboBox ItemsSource="{Binding ListTradeAction}"
+                                              SelectedValue="{Binding BidOffer,Mode=TwoWay}"
+                                              PlaceholderText="Select Action">
                                     </ComboBox>
                                 </StackPanel>
                             </DataTemplate>
                         </controls:DataGridTemplateColumn.CellTemplate>
                     </controls:DataGridTemplateColumn>
-                    <controls:DataGridTemplateColumn Header="Running">
+                    <controls:DataGridTemplateColumn Header="Run">
                         <controls:DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Button Content="Start"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </controls:DataGridTemplateColumn.CellTemplate>
-                    </controls:DataGridTemplateColumn>
-                    <controls:DataGridTemplateColumn Header="Start">
-                        <controls:DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Button Content="Start"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </controls:DataGridTemplateColumn.CellTemplate>
-                    </controls:DataGridTemplateColumn>
-                    <controls:DataGridTemplateColumn Header="Stop">
-                        <controls:DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Button Content="Stop"/>
+                                    <ToggleSwitch x:Name="ToggelSwitch_Run"
+                                                  IsOn="{Binding Running,Mode=TwoWay}">
+                                        <interact:Interaction.Behaviors>
+                                            <interactcore:EventTriggerBehavior EventName="Toggled">
+                                                <interactcore:InvokeCommandAction Command="{Binding ToggleSwitchToggled_Command}"
+                                                                                  CommandParameter="{Binding ElementName=DataComboBox}"/>
+                                            </interactcore:EventTriggerBehavior>
+                                        </interact:Interaction.Behaviors>
+                                    </ToggleSwitch>
                                 </StackPanel>
                             </DataTemplate>
                         </controls:DataGridTemplateColumn.CellTemplate>

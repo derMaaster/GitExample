@@ -3,6 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Full_Arch_UWP_Autofac.Themes">
 
+    
+    
     <Style TargetType="Button" x:Name="MenuItemButtonStyle" x:Key="MenuItemButtonStyle">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="MinHeight" Value="{ThemeResource ListViewItemMinHeight}"/>

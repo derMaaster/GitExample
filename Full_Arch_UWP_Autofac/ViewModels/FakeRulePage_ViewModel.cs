@@ -7,6 +7,9 @@ using Full_Arch_UWP_Autofac.Helpers;
 using System.Collections.ObjectModel;
 using Test_Core.Application;
 using System.Diagnostics;
+using Test_Core.Domain;
+
+using Windows.UI.Xaml.Controls;
 
 namespace Full_Arch_UWP_Autofac.ViewModels
 {
@@ -14,15 +17,22 @@ namespace Full_Arch_UWP_Autofac.ViewModels
     {
         private readonly IFakeRule_Engine _fakeRuleEngine;
 
-        public ObservableCollection<RBTATMRules_Data> RBTATMRules { get; set; } = new ObservableCollection<RBTATMRules_Data>();
-        public ObservableCollection<RBTStrikeRule_Data> RBTStrikeRules { get; set; } = new ObservableCollection<RBTStrikeRule_Data>();
+        public ObservableCollection<RBTRule_Data> RBTRules { get; set; } = new ObservableCollection<RBTRule_Data>();
+        public List<TradeAction> ListTradeAction { get; set; } = new List<TradeAction>();
+
+
+
+        public MyICommand<ToggleSwitch> ToggleSwitchToggled_Command { get; private set; }
 
         public FakeRulePage_ViewModel(
             IFakeRule_Engine fakeRule_Engine)
         {
             _fakeRuleEngine = fakeRule_Engine;
             _fakeRuleEngine.PropertyChanged += FakeRuleEngine_PropertyChanged;
-            
+
+            ToggleSwitchToggled_Command = new MyICommand<ToggleSwitch>(ToggleSwitchToggled);
+
+            LoadControls();
             GetEngineRules();
         }
 
@@ -32,57 +42,75 @@ namespace Full_Arch_UWP_Autofac.ViewModels
             // vang as n Rule se Running status verander. Update die "lig" asook start/stop buttons
             throw new NotImplementedException();
         }
+        private void ToggleSwitchToggled(ToggleSwitch toggleSwitch)
+        {
+            //string comboboxSelection = comboBox.SelectedItem.ToString();
 
+            //switch (comboboxSelection)
+            //{
+            //    case "ATM":
+            //        MainListData = KryKarre();
+            //        break;
+            //    case "Mense":
+            //        MainListData = KryMense();
+            //        break;
+            //    case "InstantDoubleString":
+            //        MainListData = InstantDoubleString();
+            //        break;
+            //}
+        }
+
+        private void LoadControls()
+        {
+            ListTradeAction.Add(TradeAction.Bid);
+            ListTradeAction.Add(TradeAction.Offer);
+        }
         private void GetEngineRules()
         {
-            var newATMRule = new RBTATMRules_Data()
+            var newATMRule = new RBTRule_Data()
             {
+                RuleType = RuleType.ATM,
                 MonthID = "Mar21 WMAZ",
                 Qty = 1,
                 Wins = 300,
                 Vol = 33.75,
-                Running = false,
-                Start = false,
-                Stop = false
+                Running = false
             };
-            var newATMRuleTwo = new RBTATMRules_Data()
+            var newATMRuleTwo = new RBTRule_Data()
             {
+                RuleType = RuleType.ATM,
                 MonthID = "JUL 21 WMAZ",
                 Qty = 1,
                 Wins = 500,
                 Vol = 26.5,
-                Running = false,
-                Start = false,
-                Stop = false
+                Running = false
             };
-            RBTATMRules.Add(newATMRule);
-            RBTATMRules.Add(newATMRuleTwo);
+            RBTRules.Add(newATMRule);
+            RBTRules.Add(newATMRuleTwo);
 
 
-            var newStrikeRule = new RBTStrikeRule_Data()
+            var newStrikeRule = new RBTRule_Data()
             {
+                RuleType = RuleType.Strike,
                 MonthID = "Mar21 WMAZ",
                 Qty = 1,
-                Xo = 300,
+                Xo = 3000,
                 Vol = 33.75,
                 BidOffer = Test_Core.Domain.TradeAction.Bid,
-                Running = false,
-                Start = false,
-                Stop = false
+                Running = false
             };
-            var newStrikeRuleTwo = new RBTStrikeRule_Data()
+            var newStrikeRuleTwo = new RBTRule_Data()
             {
+                RuleType = RuleType.Strike,
                 MonthID = "JUL 21 WMAZ",
                 Qty = 1,
-                Xo = 400,
+                Xo = 4100,
                 Vol = 26.75,
                 BidOffer = Test_Core.Domain.TradeAction.Offer,
-                Running = false,
-                Start = false,
-                Stop = false
+                Running = false
             };
-            RBTStrikeRules.Add(newStrikeRule);
-            RBTStrikeRules.Add(newStrikeRuleTwo);
+            RBTRules.Add(newStrikeRule);
+            RBTRules.Add(newStrikeRuleTwo);
         }
     }
 }

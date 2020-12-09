@@ -42,6 +42,7 @@
                 </interact:Interaction.Behaviors>
             </ComboBox>
 
+
         </StackPanel>
         <StackPanel Grid.Row="1">
             <Button x:Name="ButtonLoadTradeInstrumente"
