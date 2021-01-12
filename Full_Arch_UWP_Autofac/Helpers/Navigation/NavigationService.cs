@@ -99,9 +99,7 @@ namespace Full_Arch_UWP_Autofac.Helpers
                     return UnknownPage;
 
                 var frameString = mainFrame.Content.ToString();
-
                 return frameString;
-
             }
         }
     }

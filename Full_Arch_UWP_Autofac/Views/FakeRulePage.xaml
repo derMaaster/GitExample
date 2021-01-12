@@ -2,7 +2,7 @@
     x:Class="Full_Arch_UWP_Autofac.Views.FakeRulePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Full_Arch_UWP_Autofac.Views"
+    xmlns:local="using:Full_Arch_UWP_Autofac.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -23,44 +23,22 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
             <controls:DataGrid Name="RBTSnipe" GridLinesVisibility="All"
-                               AlternatingRowBackground="Gray" AutoGenerateColumns="False"                               
+                               AlternatingRowBackground="Gray" AutoGenerateColumns="False"
                                ItemsSource="{Binding RBTRules,Mode=TwoWay}">
                 <controls:DataGrid.Columns>
-                    <controls:DataGridTextColumn Header="RuleType" Binding="{Binding RuleType,Mode=TwoWay}"/>
-                    <controls:DataGridTextColumn Header="Month" Binding="{Binding MonthID,Mode=TwoWay}"/>
+                    <controls:DataGridComboBoxColumn Header="RuleType" 
+                                                     Binding="{Binding RuleType,Mode=TwoWay}"
+                                                     ItemsSource="{x:Bind local:FakeRulePage_ViewModel.Rules,Mode=OneWay}"
+                                                     DisplayMemberPath="RuleType"/>
+                    <controls:DataGridTextColumn Header="Month" Binding="{Binding ID,Mode=TwoWay}"/>
                     <controls:DataGridTextColumn Header="Qty" Binding="{Binding Qty,Mode=TwoWay}"/>
                     <controls:DataGridTextColumn Header="Vol" Binding="{Binding Vol,Mode=TwoWay}"/>
                     <controls:DataGridTextColumn Header="Wins" Binding="{Binding Wins,Mode=TwoWay}"/>
                     <controls:DataGridTextColumn Header="Xo" Binding="{Binding Xo,Mode=TwoWay}"/>
-                    <controls:DataGridTemplateColumn Header="BidOffer">
-                        <controls:DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <ComboBox ItemsSource="{Binding ListTradeAction}"
-                                              SelectedValue="{Binding BidOffer,Mode=TwoWay}"
-                                              PlaceholderText="Select Action">
-                                    </ComboBox>
-                                </StackPanel>
-                            </DataTemplate>
-                        </controls:DataGridTemplateColumn.CellTemplate>
-                    </controls:DataGridTemplateColumn>
-                    <controls:DataGridTemplateColumn Header="Run">
-                        <controls:DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <ToggleSwitch x:Name="ToggelSwitch_Run"
-                                                  IsOn="{Binding Running,Mode=TwoWay}">
-                                        <interact:Interaction.Behaviors>
-                                            <interactcore:EventTriggerBehavior EventName="Toggled">
-                                                <interactcore:InvokeCommandAction Command="{Binding ToggleSwitchToggled_Command}"
-                                                                                  CommandParameter="{Binding ElementName=DataComboBox}"/>
-                                            </interactcore:EventTriggerBehavior>
-                                        </interact:Interaction.Behaviors>
-                                    </ToggleSwitch>
-                                </StackPanel>
-                            </DataTemplate>
-                        </controls:DataGridTemplateColumn.CellTemplate>
-                    </controls:DataGridTemplateColumn>
+                    <controls:DataGridComboBoxColumn Header="BidOffer"
+                                                     Binding="{Binding Action, Mode=TwoWay}"
+                                                     ItemsSource="{x:Bind local:FakeRulePage_ViewModel.ListTradeAction, Mode=OneWay}"
+                                                     DisplayMemberPath="Action"/>
                 </controls:DataGrid.Columns>
             </controls:DataGrid>
         </StackPanel>
@@ -68,3 +46,24 @@
 
     </Grid>
 </Page>
+
+    
+    
+
+<!--<controls:DataGridTemplateColumn Header="Run">
+    <controls:DataGridTemplateColumn.CellTemplate>
+        <DataTemplate>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <ToggleSwitch x:Name="ToggelSwitch_Run"
+                                                  IsOn="{Binding Running,Mode=TwoWay}">
+                    <interact:Interaction.Behaviors>
+                        <interactcore:EventTriggerBehavior EventName="Toggled">
+                            <interactcore:InvokeCommandAction Command="{Binding ToggleSwitchToggled_Command}"
+                                                                                  CommandParameter="{Binding}"/>
+                        </interactcore:EventTriggerBehavior>
+                    </interact:Interaction.Behaviors>
+                </ToggleSwitch>
+            </StackPanel>
+        </DataTemplate>
+    </controls:DataGridTemplateColumn.CellTemplate>
+</controls:DataGridTemplateColumn>-->

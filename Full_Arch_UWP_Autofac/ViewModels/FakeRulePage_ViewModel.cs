@@ -7,7 +7,7 @@ using Full_Arch_UWP_Autofac.Helpers;
 using System.Collections.ObjectModel;
 using Test_Core.Application;
 using System.Diagnostics;
-using Test_Core.Domain;
+//using Test_Core.Domain;
 
 using Windows.UI.Xaml.Controls;
 
@@ -17,10 +17,9 @@ namespace Full_Arch_UWP_Autofac.ViewModels
     {
         private readonly IFakeRule_Engine _fakeRuleEngine;
 
-        public ObservableCollection<RBTRule_Data> RBTRules { get; set; } = new ObservableCollection<RBTRule_Data>();
-        public List<TradeAction> ListTradeAction { get; set; } = new List<TradeAction>();
-
-
+        public ObservableCollection<VMRule_Data> RBTRules { get; set; }
+        public static List<BidOffer> ListTradeAction { get; set; }
+        public static List<OptionRules> Rules { get; set; }
 
         public MyICommand<ToggleSwitch> ToggleSwitchToggled_Command { get; private set; }
 
@@ -62,55 +61,103 @@ namespace Full_Arch_UWP_Autofac.ViewModels
 
         private void LoadControls()
         {
-            ListTradeAction.Add(TradeAction.Bid);
-            ListTradeAction.Add(TradeAction.Offer);
+            Rules = new List<OptionRules>
+            {
+                new OptionRules {ID = 1, RuleType= "ATM"},
+                new OptionRules {ID = 2, RuleType= "HigherCalls"},
+            };
+
+            ListTradeAction = new List<BidOffer>
+            {
+                new BidOffer {ID = 1, Action= "Bid"},
+                new BidOffer {ID = 2, Action= "Offer"}
+            };
+
+            RBTRules = new ObservableCollection<VMRule_Data>
+            {
+                new VMRule_Data
+                {
+                    RuleType = "ATM",
+                    ID = "Mar21 WMAZ",
+                    Qty = 1,
+                    Vol = 33.75,
+                    Wins = 500,
+                    Xo = 0,
+                    Action = "Bid",
+                    Running = false
+                },
+                new VMRule_Data
+                {
+                    RuleType = "ATM",
+                    ID = "JUN21 WMAZ",
+                    Qty = 1,
+                    Vol = 22.75,
+                    Wins = 300,
+                    Xo = 0,
+                    Action = "Bid",
+                    Running = false
+                },
+                new VMRule_Data
+                {
+                    RuleType = "HighCalls",
+                    ID = "Mar21 WMAZ",
+                    Qty = 1,
+                    Vol = 22.75,
+                    Wins = 0,
+                    Xo = 0,
+                    Action = "Bid",
+                    Running = false
+                },
+                new VMRule_Data
+                {
+                    RuleType = "HighCalls",
+                    ID = "JUN21 WMAZ",
+                    Qty = 1,
+                    Vol = 22.75,
+                    Wins = 0,
+                    Xo = 0,
+                    Action = "Bid",
+                    Running = false
+                },
+                new VMRule_Data
+                {
+                    RuleType = "HigherCalls",
+                    ID = "JUN21 WMAZ",
+                    Qty = 1,
+                    Vol = 20.75,
+                    Wins = 0,
+                    Xo = 0,
+                    Action = "Bid",
+                    Running = false
+                }
+            };
         }
+
         private void GetEngineRules()
         {
-            var newATMRule = new RBTRule_Data()
-            {
-                RuleType = RuleType.ATM,
-                MonthID = "Mar21 WMAZ",
-                Qty = 1,
-                Wins = 300,
-                Vol = 33.75,
-                Running = false
-            };
-            var newATMRuleTwo = new RBTRule_Data()
-            {
-                RuleType = RuleType.ATM,
-                MonthID = "JUL 21 WMAZ",
-                Qty = 1,
-                Wins = 500,
-                Vol = 26.5,
-                Running = false
-            };
-            RBTRules.Add(newATMRule);
-            RBTRules.Add(newATMRuleTwo);
 
-
-            var newStrikeRule = new RBTRule_Data()
-            {
-                RuleType = RuleType.Strike,
-                MonthID = "Mar21 WMAZ",
-                Qty = 1,
-                Xo = 3000,
-                Vol = 33.75,
-                BidOffer = Test_Core.Domain.TradeAction.Bid,
-                Running = false
-            };
-            var newStrikeRuleTwo = new RBTRule_Data()
-            {
-                RuleType = RuleType.Strike,
-                MonthID = "JUL 21 WMAZ",
-                Qty = 1,
-                Xo = 4100,
-                Vol = 26.75,
-                BidOffer = Test_Core.Domain.TradeAction.Offer,
-                Running = false
-            };
-            RBTRules.Add(newStrikeRule);
-            RBTRules.Add(newStrikeRuleTwo);
         }
+    }
+
+    public class BidOffer
+    {
+        public int ID { get; set; }
+        public string Action { get; set; }
+    }
+    public class OptionRules
+    {
+        public int ID { get; set; }
+        public string RuleType { get; set; }
+    }
+    public class VMRule_Data
+    {
+        public string RuleType { get; set; }
+        public string ID { get; set; }
+        public double Qty { get; set; }
+        public double Vol { get; set; }
+        public double Wins { get; set; }
+        public int Xo { get; set; }
+        public string Action { get; set; }
+        public bool Running { get; set; }
     }
 }
