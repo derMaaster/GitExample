@@ -133,21 +133,8 @@
     <Compile Include="ShellPage.xaml.cs">
       <DependentUpon>ShellPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\DataClasses\RBTRule_Data.cs" />
-    <Compile Include="ViewModels\DataGridPage_ViewModel.cs" />
-    <Compile Include="ViewModels\FakeRulePage_ViewModel.cs" />
-    <Compile Include="ViewModels\MainPage_ViewModel.cs" />
     <Compile Include="ViewModels\OtherPage_ViewModel.cs" />
     <Compile Include="ViewModels\ShellPage_ViewModel.cs" />
-    <Compile Include="Views\DataGridPage.xaml.cs">
-      <DependentUpon>DataGridPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FakeRulePage.xaml.cs">
-      <DependentUpon>FakeRulePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\OtherPage.xaml.cs">
       <DependentUpon>OtherPage.xaml</DependentUpon>
     </Compile>
@@ -205,28 +192,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DataGridPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\FakeRulePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\OtherPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Test_Core\Test_Core.csproj">
-      <Project>{e20a5c23-9666-47d6-8f3f-adb44b1c39cb}</Project>
-      <Name>Test_Core</Name>
+    <ProjectReference Include="..\ClassLibraryNetStandard\ClassLibraryNetStandard.csproj">
+      <Project>{b094667a-a046-496d-bb56-d3b03236b8e2}</Project>
+      <Name>ClassLibraryNetStandard</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

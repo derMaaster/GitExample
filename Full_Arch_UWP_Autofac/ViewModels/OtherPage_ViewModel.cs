@@ -1,86 +1,101 @@
 ﻿using System;
-using Windows.UI.Xaml.Controls;
+using System.Collections.Generic;
 using Full_Arch_UWP_Autofac.Helpers;
-using Test_Core.Application;
-using Windows.Storage;
-
-using Test_Core.Repositories;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using Windows.UI.Xaml.Controls;
+using ClassLibraryNetStandard;
 
 namespace Full_Arch_UWP_Autofac.ViewModels
 {
-    public class OtherPage_ViewModel:NotificationBaseHelper
+    public class OtherPage_ViewModel : NotificationBaseHelper
     {
-        public IService_GetSecretString ServiceGetSecretString_ { get; }
-        public IFileAccess fileAccess;
-        public MyICommand<Button> OtherButtonClickCommand { get; private set; }
+        private readonly IDIClass dIClass1;
 
-        public OtherPage_ViewModel()
+        public ObservableCollection<VMData> DataInfoSet { get; set; }
+        public List<ASelection> ListSelectionA { get; set; }
+        public List<BSelection> ListSelectionB { get; set; }
+
+
+        public MyICommand<ToggleSwitch> ToggleSwitchToggled_Command { get; private set; }
+
+        public OtherPage_ViewModel(IDIClass dIClass)
         {
-            OtherButtonClickCommand = new MyICommand<Button>(ButtonClicked);
-            ServiceGetSecretString_ = new ServiceGetSecretString();
-            fileAccess = new FileAccess();
+            dIClass1 = dIClass;
+            ToggleSwitchToggled_Command = new MyICommand<ToggleSwitch>(ToggleSwitchToggled);
+
+            LoadControls();
         }
 
-        private string _TextBoxText;
-        public string TextBoxText
+        private void ToggleSwitchToggled(ToggleSwitch toggleSwitch)
         {
-            get { return _TextBoxText; }
-            set { SetProperty(ref _TextBoxText,value); }
-        }        
+            //string comboboxSelection = comboBox.SelectedItem.ToString();
 
-        public void ButtonClicked(Button button)
+            //switch (comboboxSelection)
+            //{
+            //    case "ATM":
+            //        MainListData = KryKarre();
+            //        break;
+            //    case "Mense":
+            //        MainListData = KryMense();
+            //        break;
+            //    case "InstantDoubleString":
+            //        MainListData = InstantDoubleString();
+            //        break;
+            //}
+        }
+
+        private void LoadControls()
         {
-            string buttonName = button.Name;
-            switch (buttonName)
+            ListSelectionB = new List<BSelection>
             {
-                case "ButtonGetSecret":
-                    TextBoxText = ServiceGetSecretString_.GetString();
-                    break;
-                case "ButtonGetLocalStorageFolder":
-                    TextBoxText = GetLocalStorageFolderString();
-                    break;
-                case "ButtonCreateFolder":
-                    TextBoxText = CreateFolder();
-                    break;
-                case "ButtonGetAppStorageFolder":
-                    TextBoxText = GetAppStorageFolderString();
-                    break;                    
-            }
-        }
-        private string GetAppStorageFolderString()
-        {
-            string location = "";
-            StorageFolder appFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+                new BSelection {ID = 1, MyType= "TypeOne"},
+                new BSelection {ID = 2, MyType= "TypeTwo"},
+            };
 
-            location = appFolder.Name + " folder path: " + appFolder.Path;
+            ListSelectionA = new List<ASelection>
+            {
+                new ASelection {ID = 1, Action= "Run"},
+                new ASelection {ID = 2, Action= "Stop"}
+            };
 
-            return location;
+            DataInfoSet = new ObservableCollection<VMData>
+            {
+                new VMData
+                {
+                    MyType = "TypeOne",
+                    ID = "1",
+                    Qty = 1,
+                    Action = "Run",
+                    Running = false
+                },
+                new VMData
+                {
+                    MyType = "TypeTwo",
+                    ID = "2",
+                    Qty = 1,
+                    Action = "Stop",
+                    Running = false
+                }
+            };
         }
-        public async Task<string> CreateFileInStorageFolder()
-        {
-            //                case "ButtonGetAppStorageFolder":
-            //        TextBoxText = CreateFileInStorageFolder();
-            //break;
+    }
 
-            UWPStorageFolder uWPStorageFolder = new UWPStorageFolder();
-            var result = await uWPStorageFolder.CreateFileInStorageFolder();
-            //var resultString = await result;
-
-            return result;
-        }
-        private string GetLocalStorageFolderString()
-        {
-            string location = "";
-            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-            location = localFolder.Path;
-            return location;
-        }
-        public string CreateFolder()
-        {
-            string result = fileAccess.CreateFileTest();
-            return result;
-        }
-
+    public class ASelection
+    {
+        public int ID { get; set; }
+        public string Action { get; set; }
+    }
+    public class BSelection
+    {
+        public int ID { get; set; }
+        public string MyType { get; set; }
+    }
+    public class VMData
+    {
+        public string MyType { get; set; }
+        public string ID { get; set; }
+        public double Qty { get; set; }
+        public string Action { get; set; }
+        public bool Running { get; set; }
     }
 }

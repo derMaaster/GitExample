@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Test_Core.Application
+namespace ClassLibraryNetStandard
 {
-    public interface ILogger
+    public interface IDIClass
     {
     }
 }

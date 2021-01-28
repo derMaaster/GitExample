@@ -17,26 +17,11 @@
             <Grid>
                 <StackPanel x:Name="NavigationMenu" 
                             Orientation="Vertical">
-                    <RadioButton x:Name="Option1"
-                                 GroupName="Group1"
-                                 Style="{StaticResource AllStarNavigationButtonStyle}"
-                                 IsChecked="{Binding MainPageSelected,Mode=TwoWay}"
-                                 Tag="&#59155;"/>
                     <RadioButton x:Name="Option2"
                                  GroupName="Group1"
                                  Style="{StaticResource AllStarNavigationButtonStyle}"
                                  IsChecked="{Binding OtherPageSelected, Mode=TwoWay}"
                                  Tag="&#59189;"/>
-                    <RadioButton x:Name="Option3"
-                                 GroupName="Group1"
-                                 Style="{StaticResource AllStarNavigationButtonStyle}"
-                                 IsChecked="{Binding DataGridPageSelected, Mode=TwoWay}"
-                                 Tag="&#59165;"/>
-                    <RadioButton x:Name="Option4"
-                                 GroupName="Group1"
-                                 Style="{StaticResource AllStarNavigationButtonStyle}"
-                                 IsChecked="{Binding FakeRulePageSelected, Mode=TwoWay}"
-                                 Tag="&#xE709;"/>
                 </StackPanel>
             </Grid>
 

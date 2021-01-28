@@ -8,10 +8,7 @@ using Autofac;
 using Full_Arch_UWP_Autofac.Views;
 using Full_Arch_UWP_Autofac.ViewModels;
 using Full_Arch_UWP_Autofac.Helpers;
-using Test_Core.Domain;
-using Test_Core.Application;
-
-//https://stackoverflow.com/questions/49843225/how-to-use-autofac-in-an-uwp-app
+using ClassLibraryNetStandard;
 
 namespace Full_Arch_UWP_Autofac
 {
@@ -37,21 +34,11 @@ namespace Full_Arch_UWP_Autofac
         {
             var containerBuilder = new ContainerBuilder();
 
-            //  Registers all the platform-specific implementations of services.
-            //      domain:
-            containerBuilder.RegisterType<DomainDebugWriteString>().As<IDomain_WriteString>();
-            containerBuilder.RegisterType<DomainGetSecretString>().As<IDomain_GetSecretString>();
-            //      serviceLayer/application layer:
-            containerBuilder.RegisterType<ServiceDebugWriteString>().As<IService_DebugWriteString>();
-            containerBuilder.RegisterType<ServiceGetSecretString>().As<IService_GetSecretString>();
-            containerBuilder.RegisterType<FakeRule_Engine>().As<IFakeRule_Engine>().SingleInstance();
+            containerBuilder.RegisterType<DIClass>().As<IDIClass>().SingleInstance();
 
             //ViewModels as well:
             containerBuilder.RegisterType<ShellPage_ViewModel>().AsSelf().SingleInstance();
-            containerBuilder.RegisterType<MainPage_ViewModel>().AsSelf();
             containerBuilder.RegisterType<OtherPage_ViewModel>().AsSelf();
-            containerBuilder.RegisterType<DataGridPage_ViewModel>().AsSelf();
-            containerBuilder.RegisterType<FakeRulePage_ViewModel>().AsSelf();
 
             //Navigation:
             containerBuilder.RegisterType<DefaultFrameProvider>().As<IFrameProvider>();
@@ -88,10 +75,7 @@ namespace Full_Arch_UWP_Autofac
             }
             //**Activating Navigation service, and configure non-shellpage references
             var service = Container.Resolve<INavigationService>();
-            service.ConfigureBindings("MainPage", typeof(MainPage), typeof(MainPage_ViewModel));
             service.ConfigureBindings("OtherPage", typeof(OtherPage), typeof(OtherPage_ViewModel));
-            service.ConfigureBindings("DataGridPage", typeof(DataGridPage), typeof(DataGridPage_ViewModel));
-            service.ConfigureBindings("FakeRulePage", typeof(FakeRulePage), typeof(FakeRulePage_ViewModel));
 
             if (e.PrelaunchActivated == false)
             {

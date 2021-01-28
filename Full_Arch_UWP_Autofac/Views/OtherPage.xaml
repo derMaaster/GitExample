@@ -6,38 +6,56 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:interact="using:Microsoft.Xaml.Interactivity"
+    xmlns:interactcore="using:Microsoft.Xaml.Interactions.Core">
 
     <Grid>
-        <StackPanel>
-            <Button x:Name="ButtonGetSecret"
-                    Content="Get the secret text from Domain logic"
-                    Command="{Binding OtherButtonClickCommand}"
-                    CommandParameter="{Binding ElementName=ButtonGetSecret}"
-                    Margin="10,10,0,0">
-            </Button>
-            <Button x:Name="ButtonGetAppStorageFolder"
-                    Content="Get this app's install directory"
-                    Command="{Binding OtherButtonClickCommand}"
-                    CommandParameter="{Binding ElementName=ButtonGetAppStorageFolder}"
-                    Margin="10,10,0,0">
-            </Button>
-            <Button x:Name="ButtonGetLocalStorageFolder"
-                    Content="Get app local storage access location?"
-                    Command="{Binding OtherButtonClickCommand}"
-                    CommandParameter="{Binding ElementName=ButtonGetLocalStorageFolder}"
-                    Margin="10,10,0,0">
-            </Button>
-            <Button x:Name="ButtonCreateFolder"
-                    Content="Create file in solution source code folder"
-                    Command="{Binding OtherButtonClickCommand}"
-                    CommandParameter="{Binding ElementName=ButtonCreateFolder}"
-                    Margin="10,10,0,0">
-            </Button>
-            <TextBox Text="{Binding TextBoxText,Mode=OneWay}"
-                     Margin="10"
-                     PlaceholderText="click button to load this textblock with secret text..."/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="700"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <controls:DataGrid Name="RBTSnipe" GridLinesVisibility="All"
+                               AlternatingRowBackground="Gray" AutoGenerateColumns="False"
+                               ItemsSource="{Binding DataInfoSet,Mode=TwoWay}">
+                <controls:DataGrid.Columns>
+                    <controls:DataGridComboBoxColumn Header="RuleType" 
+                                                     Binding="{Binding MyType,Mode=TwoWay}"
+                                                     ItemsSource="{x:Bind ViewModel.ListSelectionB,Mode=OneWay}"
+                                                     DisplayMemberPath="RuleType"/>
+                    <controls:DataGridTextColumn Header="Month" Binding="{Binding ID,Mode=TwoWay}"/>
+                    <controls:DataGridTextColumn Header="Qty" Binding="{Binding Qty,Mode=TwoWay}"/>
+                    <controls:DataGridTextColumn Header="Vol" Binding="{Binding Vol,Mode=TwoWay}"/>
+                    <controls:DataGridTextColumn Header="Wins" Binding="{Binding Wins,Mode=TwoWay}"/>
+                    <controls:DataGridTextColumn Header="Xo" Binding="{Binding Xo,Mode=TwoWay}"/>
+                    <controls:DataGridComboBoxColumn Header="BidOffer"
+                                                     Binding="{Binding Action, Mode=TwoWay}"
+                                                     ItemsSource="{x:Bind ViewModel.ListSelectionA, Mode=OneWay}"
+                                                     DisplayMemberPath="Action"/>
+                    <controls:DataGridTemplateColumn Header="Run">
+                        <controls:DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <ToggleButton IsChecked="{Binding Running, Mode=TwoWay}"                                                  
+                                                  Content="Running"
+                                                  x:Name="ThisToggelButton"
+                                                  IsThreeState="False"
+                                                  Click="{x:Bind PageVM.ToggleSwitchToggled_Command}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </controls:DataGridTemplateColumn.CellTemplate>
+                    </controls:DataGridTemplateColumn>
+                </controls:DataGrid.Columns>
+            </controls:DataGrid>
         </StackPanel>
+
 
     </Grid>
 </Page>

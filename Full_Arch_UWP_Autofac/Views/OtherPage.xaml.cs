@@ -27,7 +27,8 @@ namespace Full_Arch_UWP_Autofac.Views
         {
             this.InitializeComponent();
         }
-        public OtherPage_ViewModel ViewModel { get { return (OtherPage_ViewModel)DataContext; } }
+        public OtherPage_ViewModel ViewModel => this.DataContext as OtherPage_ViewModel;
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);

@@ -11,15 +11,6 @@ namespace Full_Arch_UWP_Autofac.ViewModels
             this.Navigation = navigation;
         }
 
-        public Boolean MainPageSelected
-        {
-            get {return Navigation.CurrentPage == "MainPage"; }
-            set
-            {
-                if (value)
-                    Navigation.NavigateShellFrame("MainPage");
-            }
-        }
         public Boolean OtherPageSelected
         {
             get { return Navigation.CurrentPage == "OtherPage"; }
@@ -29,25 +20,5 @@ namespace Full_Arch_UWP_Autofac.ViewModels
                     Navigation.NavigateShellFrame("OtherPage");
             }
         }
-        public Boolean DataGridPageSelected
-        {
-            get { return Navigation.CurrentPage == "DataGridPage"; }
-            set
-            {
-                if (value)
-                    Navigation.NavigateShellFrame("DataGridPage");
-            }
-        }
-        public Boolean FakeRulePageSelected
-        {
-            get { return Navigation.CurrentPage == "FakeRulePage"; }
-            set
-            {
-                if (value)
-                    Navigation.NavigateShellFrame("FakeRulePage");
-            }
-        }
-
-
     }
 }
