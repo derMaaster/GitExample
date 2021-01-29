@@ -22,32 +22,34 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
-            <controls:DataGrid Name="RBTSnipe" GridLinesVisibility="All"
+            <controls:DataGrid Name="MyDataGrid"
+                               GridLinesVisibility="All"
                                AlternatingRowBackground="Gray" AutoGenerateColumns="False"
-                               ItemsSource="{Binding DataInfoSet,Mode=TwoWay}">
+                               ItemsSource="{Binding VMDataInfoSet,Mode=TwoWay}">
                 <controls:DataGrid.Columns>
-                    <controls:DataGridComboBoxColumn Header="RuleType" 
+                    <controls:DataGridComboBoxColumn Header="MyType"
                                                      Binding="{Binding MyType,Mode=TwoWay}"
-                                                     ItemsSource="{x:Bind ViewModel.ListSelectionB,Mode=OneWay}"
-                                                     DisplayMemberPath="RuleType"/>
-                    <controls:DataGridTextColumn Header="Month" Binding="{Binding ID,Mode=TwoWay}"/>
+                                                     ItemsSource="{x:Bind ViewModel.ListMyTypes,Mode=OneWay}"
+                                                     DisplayMemberPath="MyType"/>
+                    <controls:DataGridTextColumn Header="ID" Binding="{Binding ID,Mode=TwoWay}"/>
                     <controls:DataGridTextColumn Header="Qty" Binding="{Binding Qty,Mode=TwoWay}"/>
-                    <controls:DataGridTextColumn Header="Vol" Binding="{Binding Vol,Mode=TwoWay}"/>
-                    <controls:DataGridTextColumn Header="Wins" Binding="{Binding Wins,Mode=TwoWay}"/>
-                    <controls:DataGridTextColumn Header="Xo" Binding="{Binding Xo,Mode=TwoWay}"/>
-                    <controls:DataGridComboBoxColumn Header="BidOffer"
+                    <controls:DataGridComboBoxColumn Header="Action"
                                                      Binding="{Binding Action, Mode=TwoWay}"
-                                                     ItemsSource="{x:Bind ViewModel.ListSelectionA, Mode=OneWay}"
+                                                     ItemsSource="{x:Bind ViewModel.ListMyActions, Mode=OneWay}"
                                                      DisplayMemberPath="Action"/>
                     <controls:DataGridTemplateColumn Header="Run">
                         <controls:DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <ToggleButton IsChecked="{Binding Running, Mode=TwoWay}"                                                  
-                                                  Content="Running"
-                                                  x:Name="ThisToggelButton"
-                                                  IsThreeState="False"
-                                                  Click="{x:Bind PageVM.ToggleSwitchToggled_Command}"/>
+                                    <ToggleSwitch IsOn="{Binding Running,Mode=TwoWay}">
+                                        <interact:Interaction.Behaviors>
+                                            <interactcore:EventTriggerBehavior EventName="Toggled">
+                                                <interactcore:InvokeCommandAction Command="{x:Bind ViewModel.ToggleSwitchToggled_Command}">
+                                                    
+                                                </interactcore:InvokeCommandAction>
+                                            </interactcore:EventTriggerBehavior>
+                                        </interact:Interaction.Behaviors>
+                                    </ToggleSwitch>
                                 </StackPanel>
                             </DataTemplate>
                         </controls:DataGridTemplateColumn.CellTemplate>
@@ -55,7 +57,5 @@
                 </controls:DataGrid.Columns>
             </controls:DataGrid>
         </StackPanel>
-
-
     </Grid>
 </Page>

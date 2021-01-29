@@ -57,7 +57,7 @@
                                 Height="30"
                                 Background="Gray">
                         <CommandBar.Content>
-                            <TextBlock Text="Connection status, app time, CPU usage etc"
+                            <TextBlock Text="app time, CPU usage etc"
                                        Margin="5,2,2,2">
                             </TextBlock>
                         </CommandBar.Content>

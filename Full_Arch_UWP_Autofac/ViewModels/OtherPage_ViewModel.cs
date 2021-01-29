@@ -4,6 +4,7 @@ using Full_Arch_UWP_Autofac.Helpers;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Controls;
 using ClassLibraryNetStandard;
+using System.Diagnostics;
 
 namespace Full_Arch_UWP_Autofac.ViewModels
 {
@@ -11,9 +12,9 @@ namespace Full_Arch_UWP_Autofac.ViewModels
     {
         private readonly IDIClass dIClass1;
 
-        public ObservableCollection<VMData> DataInfoSet { get; set; }
-        public List<ASelection> ListSelectionA { get; set; }
-        public List<BSelection> ListSelectionB { get; set; }
+        public ObservableCollection<VMData> VMDataInfoSet { get; set; }
+        public List<Actions> ListMyActions { get; set; }
+        public List<Types> ListMyTypes { get; set; }
 
 
         public MyICommand<ToggleSwitch> ToggleSwitchToggled_Command { get; private set; }
@@ -28,37 +29,24 @@ namespace Full_Arch_UWP_Autofac.ViewModels
 
         private void ToggleSwitchToggled(ToggleSwitch toggleSwitch)
         {
-            //string comboboxSelection = comboBox.SelectedItem.ToString();
-
-            //switch (comboboxSelection)
-            //{
-            //    case "ATM":
-            //        MainListData = KryKarre();
-            //        break;
-            //    case "Mense":
-            //        MainListData = KryMense();
-            //        break;
-            //    case "InstantDoubleString":
-            //        MainListData = InstantDoubleString();
-            //        break;
-            //}
+            Debug.WriteLine("Toggle Switch Command was called");
         }
 
         private void LoadControls()
         {
-            ListSelectionB = new List<BSelection>
+            ListMyTypes = new List<Types>
             {
-                new BSelection {ID = 1, MyType= "TypeOne"},
-                new BSelection {ID = 2, MyType= "TypeTwo"},
+                new Types {ID = 1, MyType= "TypeOne"},
+                new Types {ID = 2, MyType= "TypeTwo"},
             };
 
-            ListSelectionA = new List<ASelection>
+            ListMyActions = new List<Actions>
             {
-                new ASelection {ID = 1, Action= "Run"},
-                new ASelection {ID = 2, Action= "Stop"}
+                new Actions {ID = 1, Action= "Run"},
+                new Actions {ID = 2, Action= "Stop"}
             };
 
-            DataInfoSet = new ObservableCollection<VMData>
+            VMDataInfoSet = new ObservableCollection<VMData>
             {
                 new VMData
                 {
@@ -80,12 +68,12 @@ namespace Full_Arch_UWP_Autofac.ViewModels
         }
     }
 
-    public class ASelection
+    public class Actions
     {
         public int ID { get; set; }
         public string Action { get; set; }
     }
-    public class BSelection
+    public class Types
     {
         public int ID { get; set; }
         public string MyType { get; set; }
