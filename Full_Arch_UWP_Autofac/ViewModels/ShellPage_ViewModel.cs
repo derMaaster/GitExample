@@ -20,5 +20,15 @@ namespace Full_Arch_UWP_Autofac.ViewModels
                     Navigation.NavigateShellFrame("OtherPage");
             }
         }
+
+        //public Boolean AnotherPageSelected
+        //{
+        //    get { return Navigation.CurrentPage == "AnotherPage"; }
+        //    set
+        //    {
+        //        if (value)
+        //            Navigation.NavigateShellFrame("AnotherPage");
+        //    }
+        //}
     }
 }
