@@ -2,19 +2,21 @@
     x:Class="Full_Arch_UWP_Autofac.Views.OtherPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Full_Arch_UWP_Autofac.Views"
+    xmlns:views="using:Full_Arch_UWP_Autofac.Views"
+    xmlns:vms="using:Full_Arch_UWP_Autofac.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:interact="using:Microsoft.Xaml.Interactivity"
-    xmlns:interactcore="using:Microsoft.Xaml.Interactions.Core">
-
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core">
+         
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="700"/>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -37,25 +39,25 @@
                                                      Binding="{Binding Action, Mode=TwoWay}"
                                                      ItemsSource="{x:Bind ViewModel.ListMyActions, Mode=OneWay}"
                                                      DisplayMemberPath="Action"/>
-                    <controls:DataGridTemplateColumn Header="Run">
-                        <controls:DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <ToggleSwitch IsOn="{Binding Running,Mode=TwoWay}">
-                                        <interact:Interaction.Behaviors>
-                                            <interactcore:EventTriggerBehavior EventName="Toggled">
-                                                <interactcore:InvokeCommandAction Command="{x:Bind ViewModel.ToggleSwitchToggled_Command}">
-                                                    
-                                                </interactcore:InvokeCommandAction>
-                                            </interactcore:EventTriggerBehavior>
-                                        </interact:Interaction.Behaviors>
-                                    </ToggleSwitch>
-                                </StackPanel>
-                            </DataTemplate>
-                        </controls:DataGridTemplateColumn.CellTemplate>
-                    </controls:DataGridTemplateColumn>
                 </controls:DataGrid.Columns>
             </controls:DataGrid>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <ToggleButton Content="One" x:Name="ToggleButtonOne" Margin="10,20,0,0" Width="100"
+                          Command="{Binding ToggleButtonClicked_Command}"
+                          CommandParameter="{Binding ElementName=ToggleButtonOne}"
+                          IsChecked="{Binding VMDataInfoSet[0].IsOn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <ToggleButton Content="Two" x:Name="ToggleButtonTwo" Margin="10,10,0,0" Width="100"
+                          Command="{Binding ToggleButtonClicked_Command}"
+                          CommandParameter="{Binding ElementName=ToggleButtonTwo}"
+                          IsChecked="{Binding VMDataInfoSet[1].IsOn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2">
+            <Button x:Name="ButtonStop" Margin="10"
+                    Content="Stop ALL Rules"
+                    Command="{Binding ButtonClicked_Command}"
+                    CommandParameter="{Binding ElementName=ButtonStop}"
+                    VerticalAlignment="Bottom"/>
         </StackPanel>
     </Grid>
 </Page>
