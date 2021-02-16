@@ -9,8 +9,8 @@ namespace ClassLibraryNetStandard.Helpers
 {
     public sealed class ExObservableCollection<T>:ObservableCollection<T> where T: INotifyPropertyChanged
     {
-        // Allister comments:
-        // This class just effectively adds ItemPropertyChanged() method to run when CollectionChanged event fires. 
+        // comments:
+        // This class just effectively adds ItemPropertyChanged() method to run when CollectionChanged event fires?
 
         public ExObservableCollection()
         {
@@ -24,7 +24,7 @@ namespace ClassLibraryNetStandard.Helpers
             }
         }
 
-        // Register ItemPropertyChanged() to each item when added, and de-register when removed:
+        // Register ItemPropertyChanged() to each item when added, and de-register when removed, ?
         private void AllObservableCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if(e.NewItems != null)
@@ -43,7 +43,7 @@ namespace ClassLibraryNetStandard.Helpers
             }
         }
 
-        // I presume this does INPC when an item within the observableCollection changes
+        // I presume this does INPC when an item within the observableCollection changes?
         private void ItemPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             NotifyCollectionChangedEventArgs args = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace,sender,sender,IndexOf((T)sender));

@@ -35,12 +35,10 @@ namespace ClassLibraryNetStandard
 
         public void Run() 
         {
-            Debug.WriteLine("ClassA Run()");
             IsOn = true;
         }
         public void Stop()
         {
-            Debug.WriteLine("ClassA Stop()");
             IsOn = false;
         }
 
@@ -48,10 +46,7 @@ namespace ClassLibraryNetStandard
         public event PropertyChangedEventHandler PropertyChanged;
         protected void RaisePropertyChanged(string name)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

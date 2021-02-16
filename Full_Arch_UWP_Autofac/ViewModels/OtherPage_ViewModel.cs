@@ -36,33 +36,35 @@ namespace Full_Arch_UWP_Autofac.ViewModels
         private void DIClass1_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Debug.WriteLine("ViewModel PropertyChanged, sender.name: " + e.PropertyName.ToString());
+
+            //...VMDataInfoSet["use baseClass sender instance to update specific VMDataInfoSet.Ison" ].IsOn = false;
         }
 
         private void ToggleButtonClicked(ToggleButton toggleButton)
         {
             string name = toggleButton.Name;
-            int id = 0;
+            int row = 0;
 
             Debug.WriteLine("Toggle Button " + name + " was clicked");
 
             switch (name)
             {
                 case ("ToggleButtonOne"):
-                    id = 0;
+                    row = 0;
                     break;
                 case ("ToggleButtonTwo"):
-                    id = 1;
+                    row = 1;
                     break;
             }
 
             // if the button was clicked to "on"/true, implement run(). Else, it was set to "off"/false, then stop()
-            if (VMDataInfoSet[id].IsOn)
+            if (VMDataInfoSet[row].IsOn)
             {
-                dIClass1.Run(id);
+                dIClass1.Run(row);
             }
             else
             {
-                dIClass1.Stop(id);
+                dIClass1.Stop(row);
             }
 
             Debug.WriteLine("ViewModel: " + VMDataInfoSet[0].IsOn.ToString() + ",  " + VMDataInfoSet[1].IsOn.ToString());
@@ -111,9 +113,7 @@ namespace Full_Arch_UWP_Autofac.ViewModels
                     Action = "Stop",
                     IsOn = false
                 }
-            };
-
-            
+            };            
         }
 
 
@@ -121,10 +121,7 @@ namespace Full_Arch_UWP_Autofac.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         protected void RaisePropertyChanged(string name)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 

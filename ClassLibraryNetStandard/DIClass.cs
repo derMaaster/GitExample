@@ -5,12 +5,14 @@ using System.Diagnostics;
 using System.Text;
 using System.ComponentModel;
 using ClassLibraryNetStandard.Helpers;
+using System.Threading.Tasks;
+using Windows.UI.Core;
 
 namespace ClassLibraryNetStandard
 {
     public class DIClass: INotifyPropertyChanged,IDIClass
     {
-        public ObservableCollection<BaseClass> ClassesOfA;
+        public ExObservableCollection<BaseClass> ClassesOfA;
 
         private string iNPCTest;
         public string INPCTest 
@@ -25,7 +27,7 @@ namespace ClassLibraryNetStandard
 
         public DIClass()
         {
-            ClassesOfA = new ObservableCollection<BaseClass>();
+            ClassesOfA = new ExObservableCollection<BaseClass>();
 
             //ClassA firstClassA = new ClassA("stringa", 1, 2,false);
             //ClassA secondClassA = new ClassA("stringb", 2, 3,false);
@@ -35,50 +37,36 @@ namespace ClassLibraryNetStandard
 
             ClassesOfA.Insert(0, firstClassA);
             ClassesOfA.Insert(1, secondClassA);
-
-            //ClassesOfA[0].PropertyChanged += DIClass_PropertyChanged;
-            //ClassesOfA[1].PropertyChanged += DIClass_PropertyChanged;
         }
 
-        private void DIClass_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        public void Run(int row)
         {
-            Debug.WriteLine("DIClass PropertyChanged, sender.name: " + e.PropertyName.ToString());
-        }
-
-        public void Run(int id)
-        {
-            //ClassesOfA[id].IsOn = true;
-
-            ClassesOfA[id].Run();
+            ClassesOfA[row].Run();
             Debug.WriteLine("SHELL' " + ClassesOfA[0].IsOn.ToString() + ",  " + ClassesOfA[1].IsOn.ToString());
         }
-        public void Stop(int id)
+        public void Stop(int row)
         {
             //ClassesOfA[id].IsOn = false;
-            ClassesOfA[id].Stop();
+            ClassesOfA[row].Stop();
             Debug.WriteLine("SHELL' " + ClassesOfA[0].IsOn.ToString() + ",  " + ClassesOfA[1].IsOn.ToString());
         }
         public void StopAll()
         {
-            //ClassesOfA[0].IsOn = false;
-            //ClassesOfA[1].IsOn = false;
-
             ClassesOfA[0].Stop();
             ClassesOfA[1].Stop();
 
-            INPCTest = "test string";
+            INPCTest = "INPCTest changed";
             
-            Debug.WriteLine("SHELL' " + ClassesOfA[0].IsOn.ToString() + ",  " + ClassesOfA[1].IsOn.ToString());
+            Debug.WriteLine("DIClass' " + ClassesOfA[0].IsOn.ToString() + ",  " + ClassesOfA[1].IsOn.ToString());
         }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void RaisePropertyChanged(string name)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+
+
     }
 }
