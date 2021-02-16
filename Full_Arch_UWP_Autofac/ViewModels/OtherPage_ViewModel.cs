@@ -36,6 +36,7 @@ namespace Full_Arch_UWP_Autofac.ViewModels
         private void DIClass1_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Debug.WriteLine("ViewModel PropertyChanged, sender.name: " + e.PropertyName.ToString());
+            VMDataInfoSet[0].IsOn = false;
 
             //...VMDataInfoSet["use baseClass sender instance to update specific VMDataInfoSet.Ison" ].IsOn = false;
         }

@@ -14,26 +14,12 @@ namespace ClassLibraryNetStandard
     {
         public ExObservableCollection<BaseClass> ClassesOfA;
 
-        private string iNPCTest;
-        public string INPCTest 
-        {
-            get { return iNPCTest; }
-            set
-            {
-                iNPCTest = value;
-                RaisePropertyChanged("DIClass: INPCTest");
-            }
-        }
-
         public DIClass()
         {
             ClassesOfA = new ExObservableCollection<BaseClass>();
 
-            //ClassA firstClassA = new ClassA("stringa", 1, 2,false);
-            //ClassA secondClassA = new ClassA("stringb", 2, 3,false);
-
-            BaseClass firstClassA = new BaseClass("stringa", 1, 2, false);
-            BaseClass secondClassA = new BaseClass("stringb", 2, 3, false);
+            BaseClass firstClassA = new BaseClass(0, false);
+            BaseClass secondClassA = new BaseClass(1, false);
 
             ClassesOfA.Insert(0, firstClassA);
             ClassesOfA.Insert(1, secondClassA);
@@ -46,7 +32,6 @@ namespace ClassLibraryNetStandard
         }
         public void Stop(int row)
         {
-            //ClassesOfA[id].IsOn = false;
             ClassesOfA[row].Stop();
             Debug.WriteLine("SHELL' " + ClassesOfA[0].IsOn.ToString() + ",  " + ClassesOfA[1].IsOn.ToString());
         }
@@ -54,8 +39,6 @@ namespace ClassLibraryNetStandard
         {
             ClassesOfA[0].Stop();
             ClassesOfA[1].Stop();
-
-            INPCTest = "INPCTest changed";
             
             Debug.WriteLine("DIClass' " + ClassesOfA[0].IsOn.ToString() + ",  " + ClassesOfA[1].IsOn.ToString());
         }

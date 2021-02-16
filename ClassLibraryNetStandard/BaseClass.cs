@@ -8,9 +8,7 @@ namespace ClassLibraryNetStandard
 {
     public class BaseClass:INotifyPropertyChanged
     {
-        public string StringA { get; set; }
-        public int IntA { get; set; }
-        public int Qty { get; set; }
+        public int ID { get; set; }
 
 
         private bool isOn;
@@ -24,11 +22,9 @@ namespace ClassLibraryNetStandard
             }
         }
 
-        public BaseClass(string strA, int intA, int qty, bool ison)
+        public BaseClass(int iD, bool ison)
         {
-            StringA = strA;
-            IntA = intA;
-            Qty = qty;
+            ID = iD;
             IsOn = ison;
         }
 
