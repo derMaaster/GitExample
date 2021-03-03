@@ -12,7 +12,7 @@ namespace Full_Arch_UWP_Autofac.ViewModels
 {
     public class OtherPage_ViewModel:INotifyPropertyChanged 
     {
-        private readonly IDIClass dIClass1;
+        private readonly IShellClass dIClass1;
 
         public ObservableCollection<VMData> VMDataInfoSet { get; set; }
         public List<Actions> ListMyActions { get; set; }
@@ -23,19 +23,19 @@ namespace Full_Arch_UWP_Autofac.ViewModels
         public MyICommand<ToggleButton> ToggleButtonClicked_Command { get; private set; }
         public MyICommand<Button> ButtonClicked_Command { get; private set; }
 
-        public OtherPage_ViewModel(IDIClass dIClass)
+        public OtherPage_ViewModel(IShellClass dIClass)
         {
             dIClass1 = dIClass;
-            dIClass1.PropertyChanged += DIClass1_PropertyChanged;           
+            dIClass1.PropertyChanged += ShellClass_PropertyChanged;           
             ToggleButtonClicked_Command = new MyICommand<ToggleButton>(ToggleButtonClicked);
             ButtonClicked_Command = new MyICommand<Button>(ButtonClicked);
 
             LoadControls();
         }
 
-        private void DIClass1_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ShellClass_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug.WriteLine("ViewModel PropertyChanged, sender.name: " + e.PropertyName.ToString());
+            Debug.WriteLine("ViewModel: ShellClass_PropertyChanged(), sender.name: " + e.PropertyName.ToString());
             VMDataInfoSet[0].IsOn = false;
 
             //...VMDataInfoSet["use baseClass sender instance to update specific VMDataInfoSet.Ison" ].IsOn = false;
@@ -46,7 +46,7 @@ namespace Full_Arch_UWP_Autofac.ViewModels
             string name = toggleButton.Name;
             int row = 0;
 
-            Debug.WriteLine("Toggle Button " + name + " was clicked");
+            //Debug.WriteLine("Toggle Button " + name + " was clicked");
 
             switch (name)
             {
@@ -68,21 +68,21 @@ namespace Full_Arch_UWP_Autofac.ViewModels
                 dIClass1.Stop(row);
             }
 
-            Debug.WriteLine("ViewModel: " + VMDataInfoSet[0].IsOn.ToString() + ",  " + VMDataInfoSet[1].IsOn.ToString());
+            //Debug.WriteLine("ViewModel: " + VMDataInfoSet[0].IsOn.ToString() + ",  " + VMDataInfoSet[1].IsOn.ToString());
 
         }
         private void ButtonClicked(Button button)
         {
             string name = button.Name;
 
-            Debug.WriteLine("Button " + name + " was clicked");
+            //Debug.WriteLine("Button " + name + " was clicked");
 
             if (name == "ButtonStop")
             {
                 dIClass1.StopAll();
             }
 
-            Debug.WriteLine("ViewModel' " + VMDataInfoSet[0].IsOn.ToString() + ",  " + VMDataInfoSet[1].IsOn.ToString());
+            //Debug.WriteLine("ViewModel' " + VMDataInfoSet[0].IsOn.ToString() + ",  " + VMDataInfoSet[1].IsOn.ToString());
         }
         private void LoadControls()
         {

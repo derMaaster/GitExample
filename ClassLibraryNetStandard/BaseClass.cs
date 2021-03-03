@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 using System.ComponentModel;
+using System.Text;
+using System.Threading.Tasks;
+using ClassLibraryNetStandard.Helpers;
 
 namespace ClassLibraryNetStandard
 {
-    public class BaseClass:INotifyPropertyChanged
+    public class BaseClass : INotifyPropertyChanged
     {
         public int ID { get; set; }
 
@@ -29,12 +30,14 @@ namespace ClassLibraryNetStandard
         }
 
 
-        public void Run() 
-        {
+        public async Task Run()
+        {            
             IsOn = true;
+            await Task.Delay(5000);
         }
-        public void Stop()
+        public async Task Stop()
         {
+            await Task.Delay(300);
             IsOn = false;
         }
 

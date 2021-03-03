@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace ClassLibraryNetStandard
 {
-    public interface IDIClass:INotifyPropertyChanged
+    public interface IShellClass:INotifyPropertyChanged
     {
         void StopAll();
         void Run(int id);

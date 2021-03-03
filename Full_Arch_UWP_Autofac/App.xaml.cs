@@ -34,7 +34,7 @@ namespace Full_Arch_UWP_Autofac
         {
             var containerBuilder = new ContainerBuilder();
 
-            containerBuilder.RegisterType<DIClass>().As<IDIClass>().SingleInstance();
+            containerBuilder.RegisterType<ShellClass>().As<IShellClass>().SingleInstance();
 
             //ViewModels as well:
             containerBuilder.RegisterType<ShellPage_ViewModel>().AsSelf().SingleInstance();
